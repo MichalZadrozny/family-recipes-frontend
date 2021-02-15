@@ -1,0 +1,16 @@
+.filter {
+	background-color: #488b8f;
+	color: #e8f1ef;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
+	width: 30rem;
+	font-size: 1.5rem;
+	padding: 3rem;
+
+	div {
+		width: 100%;
+		padding-bottom: 2rem;
+	}
+}
