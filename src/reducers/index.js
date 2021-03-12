@@ -1,3 +1,5 @@
+import React from 'react';
+
 const initialState = {
   items: [
     {
@@ -29,9 +31,43 @@ const initialState = {
   },
 };
 
-// eslint-disable-next-line arrow-body-style
 const rootReducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case('CHANGE_CHECKBOX'):
+    console.log( action.payload.event);
+      return {
+        ...state,
+        diet: {
+          ...state.diet,
+          [action.payload.event.target.id]: !state[action.payload.event.target.id],
+        },
+      };
+    default:
+      return state;
+  }
 };
+
+// if (action.id === 'meat') {
+//   this.setState((prevState) => ({
+//     diet: {
+//       ...prevState.diet,
+//       meat: !diet.meat,
+//     },
+//   }));
+// } else if (e.target.id === 'vegetarian') {
+//   this.setState((prevState) => ({
+//     diet: {
+//       ...prevState.diet,
+//       vegetarian: !diet.vegetarian,
+//     },
+//   }));
+// } else if (e.target.id === 'vegan') {
+//   this.setState((prevState) => ({
+//     diet: {
+//       ...prevState.diet,
+//       vegan: !diet.vegan,
+//     },
+//   }));
+// }
 
 export default rootReducer;

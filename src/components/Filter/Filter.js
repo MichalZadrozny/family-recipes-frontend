@@ -56,7 +56,7 @@ const Filter = ({ updateItems, handleCheckboxChange, diet }) => (
 Filter.propTypes = {
   updateItems: PropTypes.func.isRequired, 
   handleCheckboxChange: PropTypes.func.isRequired, 
-  diet: PropTypes.arrayOf(bool).isRequired,
+  diet: PropTypes.objectOf(bool).isRequired,
 };
 
 export default Filter;
