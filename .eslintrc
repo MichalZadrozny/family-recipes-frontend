@@ -18,5 +18,6 @@
         "moduleDirectory": ["node_modules", "src/"]
       }
     }
-  }
+  },
+  "parser": "babel-eslint"
 }

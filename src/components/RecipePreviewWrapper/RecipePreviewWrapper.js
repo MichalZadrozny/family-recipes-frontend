@@ -1,14 +1,21 @@
 import React from 'react';
 import RecipePreview from 'components/RecipePreviewWrapper/RecipePreview/RecipePreview';
 import styles from 'components/RecipePreviewWrapper/RecipePreviewWrapper.module.scss';
-import PropTypes from 'prop-types';
+import PropTypes, { bool } from 'prop-types';
 
-const RecipePreviewWrapper = ({ items }) => (
+const RecipePreviewWrapper = ({ items, diet }) => (
   <ul className={styles.recipePreviewWrapper}>
-    {items.map((item) => (
-      /* eslint-disable react/jsx-props-no-spreading */
-      <RecipePreview key={item.id} {...item} />
-    ))}
+    {
+      diet.meat === false && diet.vegetarian === false && diet.vegan === false ?
+        items.map((item) => (
+          /* eslint-disable react/jsx-props-no-spreading */
+          <RecipePreview key={item.id} {...item} />
+        ))
+        :
+        items.filter(item => diet[item.diet.toLowerCase()]).map((item) => (
+          /* eslint-disable react/jsx-props-no-spreading */
+          <RecipePreview key={item.id} {...item} />
+        ))}
   </ul>
 );
 
@@ -24,4 +31,5 @@ RecipePreviewWrapper.propTypes = {
       time: PropTypes.number,
     }),
   ).isRequired,
+  diet: PropTypes.objectOf(bool).isRequired,
 };

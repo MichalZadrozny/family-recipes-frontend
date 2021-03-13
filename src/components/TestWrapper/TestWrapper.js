@@ -3,107 +3,23 @@ import React from 'react';
 import Filter from 'components/Filter/Filter';
 import RecipePreviewWrapper from 'components/RecipePreviewWrapper/RecipePreviewWrapper';
 import { connect } from 'react-redux';
-import {handleCheckboxChange as checkboxChange} from 'actions';
-import { PropTypes, objectOf, bool } from 'prop-types';
-
-// class TestWrapper extends React.Component {
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       items: [...initialRecipes],
-//       diet: {
-//         meat: false,
-//         vegetarian: false,
-//         vegan: false,
-//       },
-//     };
-//   }
-//
-  const updateItems = (e) => {
-    e.preventDefault();
-
-    let newItems = [];
-    const { form } = e.target;
-
-    for (let i = 0; i < form.length; i += 1) {
-      if (form[i].value === 'true') {
-        const tempItems = this.state.items.filter((item) => item.diet === form[i].id.toUpperCase());
-        newItems = [...newItems, ...tempItems];
-      }
-    }
-
-    if (newItems.length === 0) {
-      newItems = this.state.items;
-    }
-
-    this.setState({
-      items: newItems,
-    });
-  };
-//
-//   const handleCheckboxChange = (e,{ items, diet }) => {
-//
-//     // switch
-//
-//     if (e.target.id === 'meat') {
-//       this.setState((prevState) => ({
-//         diet: {
-//           ...prevState.diet,
-//           meat: !diet.meat,
-//         },
-//       }));
-//     } else if (e.target.id === 'vegetarian') {
-//       this.setState((prevState) => ({
-//         diet: {
-//           ...prevState.diet,
-//           vegetarian: !diet.vegetarian,
-//         },
-//       }));
-//     } else if (e.target.id === 'vegan') {
-//       this.setState((prevState) => ({
-//         diet: {
-//           ...prevState.diet,
-//           vegan: !diet.vegan,
-//         },
-//       }));
-//     }
-//   };
-
-//   render() {
-//     const { diet, items } = this.state;
-
-//     return (
-//       <div>
-//         <h1>Hello</h1>
-//         {/* <Filter
-//           updateItems={this.updateItems}
-//           diet={diet}
-//           handleCheckboxChange={this.handleCheckboxChange}
-//         />
-//         <RecipePreviewWrapper items={items} /> */}
-
-//       </div>
-//     );
-//   }
-// }
+import {handleCheckboxChange as checkboxChange, /* updateItems as updateRecipes */} from 'actions';
+import { PropTypes, bool } from 'prop-types';
 
 const TestWrapper = ({ items, diet, handleCheckboxChange}) => (
   <>
     <Filter
-      updateItems={updateItems}
       diet={diet}
       handleCheckboxChange={(event) => {handleCheckboxChange(event)}}
     />
-    {console.log({ diet })}
-    <RecipePreviewWrapper items={items} />
+    <RecipePreviewWrapper items={items} diet={diet}/>
   </>
 );
 
 const mapStateToProps = ({ items, diet }) => ({ items, diet });
 
 const mapDispatchToProps = dispatch => ({
-  handleCheckboxChange: event => dispatch(checkboxChange(event))
+  handleCheckboxChange: event => dispatch(checkboxChange(event)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TestWrapper);

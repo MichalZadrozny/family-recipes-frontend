@@ -3,37 +3,37 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import {PropTypes, bool} from 'prop-types';
+import { PropTypes, bool } from 'prop-types';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from 'components/Filter/Filter.module.scss';
 
-const Filter = ({ updateItems, handleCheckboxChange, diet }) => (
+const Filter = ({ handleCheckboxChange, diet }) => (
   <form className={styles.filter}>
-    <Container className="checkbox-list">
+    <Container className='checkbox-list'>
       <h2>Dieta</h2>
-      <label htmlFor="meat">
+      <label htmlFor='meat'>
         Mięsna
-        <input type="checkbox" id="meat" value={diet.meat} onChange={handleCheckboxChange} />
+        <input type='checkbox' id='meat' value={diet.meat} onChange={handleCheckboxChange} />
       </label>
       <br />
 
-      <label htmlFor="vegetarian">
+      <label htmlFor='vegetarian'>
         Wegetariańska
         <input
-          type="checkbox"
-          id="vegetarian"
+          type='checkbox'
+          id='vegetarian'
           value={diet.vegetarian}
           onChange={handleCheckboxChange}
         />
       </label>
       <br />
-      <label htmlFor="vegan">
+      <label htmlFor='vegan'>
         Wegańska
         <input
-          type="checkbox"
-          id="vegan"
-          name="vegan"
+          type='checkbox'
+          id='vegan'
+          name='vegan'
           value={diet.vegan}
           onChange={handleCheckboxChange}
         />
@@ -42,20 +42,14 @@ const Filter = ({ updateItems, handleCheckboxChange, diet }) => (
 
     <Row>
       <Col>
-        <Button variant="light">Wyczyść</Button>
-      </Col>
-      <Col>
-        <Button variant="light" type="submit" onClick={updateItems}>
-          Filtruj
-        </Button>
+        <Button variant='light'>Wyczyść</Button>
       </Col>
     </Row>
   </form>
 );
 
 Filter.propTypes = {
-  updateItems: PropTypes.func.isRequired, 
-  handleCheckboxChange: PropTypes.func.isRequired, 
+  handleCheckboxChange: PropTypes.func.isRequired,
   diet: PropTypes.objectOf(bool).isRequired,
 };
 
