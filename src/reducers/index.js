@@ -42,8 +42,6 @@ const rootReducer = (state = initialState, action) => {
         },
       };
     case('CLEAR_FILTER_CHECKBOXES'):
-      // eslint-disable-next-line no-case-declarations
-      const {diet} = state;
       return {
         ...state,
         diet: {
