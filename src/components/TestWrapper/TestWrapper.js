@@ -3,16 +3,27 @@ import React from 'react';
 import Filter from 'components/Filter/Filter';
 import RecipePreviewWrapper from 'components/RecipePreviewWrapper/RecipePreviewWrapper';
 import { connect } from 'react-redux';
-import {handleCheckboxChange as checkboxChange, /* updateItems as updateRecipes */} from 'actions';
+import {
+  clearFilterCheckboxes as clearCheckboxes,
+  handleCheckboxChange as checkboxChange,
+} from 'actions';
 import { PropTypes, bool } from 'prop-types';
 
-const TestWrapper = ({ items, diet, handleCheckboxChange}) => (
+const TestWrapper = ({ items, diet, handleCheckboxChange, clearFilterCheckboxes }) => (
   <>
     <Filter
       diet={diet}
-      handleCheckboxChange={(event) => {handleCheckboxChange(event)}}
+      handleCheckboxChange={(event) => {
+        handleCheckboxChange(event);
+      }}
+      clearFilterCheckboxes={(event) => {
+        clearFilterCheckboxes(event);
+      }}
     />
-    <RecipePreviewWrapper items={items} diet={diet}/>
+    <RecipePreviewWrapper
+      items={items}
+      diet={diet}
+    />
   </>
 );
 
@@ -20,7 +31,8 @@ const mapStateToProps = ({ items, diet }) => ({ items, diet });
 
 const mapDispatchToProps = dispatch => ({
   handleCheckboxChange: event => dispatch(checkboxChange(event)),
-})
+  clearFilterCheckboxes: event => dispatch(clearCheckboxes(event)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TestWrapper);
 
@@ -36,4 +48,5 @@ TestWrapper.propTypes = {
     }),
   ).isRequired,
   handleCheckboxChange: PropTypes.func.isRequired,
+  clearFilterCheckboxes: PropTypes.func.isRequired,
 };

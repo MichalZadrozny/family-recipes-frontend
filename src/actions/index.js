@@ -5,3 +5,10 @@ export const handleCheckboxChange = (event) => ({
     event,
   },
 });
+
+export const clearFilterCheckboxes = (event) => ({
+  type: 'CLEAR_FILTER_CHECKBOXES',
+  payload: {
+    event,
+  },
+});

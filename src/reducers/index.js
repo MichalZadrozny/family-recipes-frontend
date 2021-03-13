@@ -41,6 +41,17 @@ const rootReducer = (state = initialState, action) => {
           [action.payload.event.target.id]: !state.diet[action.payload.event.target.id],
         },
       };
+    case('CLEAR_FILTER_CHECKBOXES'):
+      // eslint-disable-next-line no-case-declarations
+      const {diet} = state;
+      return {
+        ...state,
+        diet: {
+          vegan: false,
+          vegetarian: false,
+          meat: false
+        }
+      };
     default:
       return state;
 }

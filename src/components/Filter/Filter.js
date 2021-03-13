@@ -8,13 +8,17 @@ import { PropTypes, bool } from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from 'components/Filter/Filter.module.scss';
 
-const Filter = ({ handleCheckboxChange, diet }) => (
+const Filter = ({ handleCheckboxChange, diet, clearFilterCheckboxes }) => (
   <form className={styles.filter}>
     <Container className='checkbox-list'>
       <h2>Dieta</h2>
       <label htmlFor='meat'>
         Mięsna
-        <input type='checkbox' id='meat' value={diet.meat} onChange={handleCheckboxChange} />
+        <input
+          type='checkbox'
+          id='meat'
+          checked={diet.meat}
+          onChange={handleCheckboxChange} />
       </label>
       <br />
 
@@ -23,7 +27,7 @@ const Filter = ({ handleCheckboxChange, diet }) => (
         <input
           type='checkbox'
           id='vegetarian'
-          value={diet.vegetarian}
+          checked={diet.vegetarian}
           onChange={handleCheckboxChange}
         />
       </label>
@@ -34,7 +38,7 @@ const Filter = ({ handleCheckboxChange, diet }) => (
           type='checkbox'
           id='vegan'
           name='vegan'
-          value={diet.vegan}
+          checked={diet.vegan}
           onChange={handleCheckboxChange}
         />
       </label>
@@ -42,7 +46,7 @@ const Filter = ({ handleCheckboxChange, diet }) => (
 
     <Row>
       <Col>
-        <Button variant='light'>Wyczyść</Button>
+        <Button variant='light' onClick={clearFilterCheckboxes}>Wyczyść</Button>
       </Col>
     </Row>
   </form>
@@ -51,6 +55,7 @@ const Filter = ({ handleCheckboxChange, diet }) => (
 Filter.propTypes = {
   handleCheckboxChange: PropTypes.func.isRequired,
   diet: PropTypes.objectOf(bool).isRequired,
+  clearFilterCheckboxes: PropTypes.func.isRequired,
 };
 
 export default Filter;
