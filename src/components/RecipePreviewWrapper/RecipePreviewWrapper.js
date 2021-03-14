@@ -2,9 +2,10 @@ import React from 'react';
 import RecipePreview from 'components/RecipePreviewWrapper/RecipePreview/RecipePreview';
 import styles from 'components/RecipePreviewWrapper/RecipePreviewWrapper.module.scss';
 import PropTypes, { bool } from 'prop-types';
+import Row from 'react-bootstrap/Row';
 
 const RecipePreviewWrapper = ({ items, diet }) => (
-  <ul className={styles.recipePreviewWrapper}>
+  <Row className={styles.recipePreviewWrapper}>
     {
       diet.meat === false && diet.vegetarian === false && diet.vegan === false ?
         items.map((item) => (
@@ -16,7 +17,7 @@ const RecipePreviewWrapper = ({ items, diet }) => (
           /* eslint-disable react/jsx-props-no-spreading */
           <RecipePreview key={item.id} {...item} />
         ))}
-  </ul>
+  </Row>
 );
 
 export default RecipePreviewWrapper;

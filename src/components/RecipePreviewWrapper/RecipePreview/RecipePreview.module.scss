@@ -1,36 +1,63 @@
 .image {
-	height: 65%;
-	width: 95%;
-	border-radius: 5px;
+	height: 100%;
+	width: 100%;
+}
+
+.imageBox {
+	width: 100%;
+	height: 10em;
 }
 
 .recipePreview {
 	margin: 1.5rem;
+	list-style-type: none;
+
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	border: 1rem black;
 	background-color: #add2c9;
-	padding: 1.5rem;
-	border-radius: 30px;
-	width: 22rem;
-	height: 26rem;
+	max-width: 24rem;
+	min-width: 19rem;
+	height: 24rem;
 	font-size: 1.5rem;
+	padding: 0;
 }
 
 .info {
-	padding: 1.2rem 0 0 0;
 	height: 100%;
 	width: 100%;
+
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
 	align-items: center;
+	justify-content: space-between;
+	padding: 1.8rem;
+
+	p {
+		margin: 0;
+	}
 }
 
 .details {
-	margin-bottom: 0.5rem;
 	width: 100%;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
+	padding-top: 0.5rem;
+}
+
+.diet {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.2em;
+}
+
+.recipeName {
+	text-align: center;
+}
+
+.detailsColumn {
+	padding: 0;
+	display: flex;
+	justify-content: center;
 }
