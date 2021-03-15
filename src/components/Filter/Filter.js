@@ -9,43 +9,18 @@ import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from 'components/Filter/Filter.module.scss';
 import { clearFilterCheckboxes as clearCheckboxes, handleCheckboxChange as checkboxChange } from '../../actions';
+import DietCheckbox from './DietCheckbox/DietCheckbox';
 
 const Filter = ({ handleCheckboxChange, clearFilterCheckboxes, diet }) => (
   <form className={styles.filter}>
     <Container className='checkbox-list'>
       <h2>Dieta</h2>
-      <label htmlFor='meat'>
-        Mięsna
-        <input
-          type='checkbox'
-          id='meat'
-          checked={diet.meat}
-          onChange={handleCheckboxChange} />
-      </label>
+      <DietCheckbox handleCheckboxChange={handleCheckboxChange} diet={diet.meat} dietName="meat" label="Mięsna"/>
       <br />
-
-      <label htmlFor='vegetarian'>
-        Wegetariańska
-        <input
-          type='checkbox'
-          id='vegetarian'
-          checked={diet.vegetarian}
-          onChange={handleCheckboxChange}
-        />
-      </label>
+      <DietCheckbox handleCheckboxChange={handleCheckboxChange} diet={diet.vegetarian} dietName="vegetarian" label="Wegetariańska"/>
       <br />
-      <label htmlFor='vegan'>
-        Wegańska
-        <input
-          type='checkbox'
-          id='vegan'
-          name='vegan'
-          checked={diet.vegan}
-          onChange={handleCheckboxChange}
-        />
-      </label>
+      <DietCheckbox handleCheckboxChange={handleCheckboxChange} diet={diet.vegan} dietName="vegan" label="Wegańska"/>
     </Container>
-
     <Row>
       <Col>
         <Button variant='light' onClick={clearFilterCheckboxes}>Wyczyść</Button>

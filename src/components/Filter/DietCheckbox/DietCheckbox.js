@@ -1,11 +1,11 @@
 import React from 'react';
-import {PropTypes, bool} from 'prop-types';
+import {PropTypes} from 'prop-types';
 
-const DietCheckbox = ({diet, handleCheckboxChange }) => (
+const DietCheckbox = ({diet, handleCheckboxChange, label, dietName }) => (
   <>
-    <label htmlFor="meat">
-      Mięsna
-      <input type="checkbox" id="meat" value={diet.meat} onChange={handleCheckboxChange} />
+    <label htmlFor={dietName}>
+      {label}
+      <input type="checkbox" id={dietName} value={diet} onChange={handleCheckboxChange} />
     </label>
   </>
 );
@@ -13,7 +13,9 @@ const DietCheckbox = ({diet, handleCheckboxChange }) => (
 
 DietCheckbox.propTypes = {
   handleCheckboxChange: PropTypes.func.isRequired, 
-  diet: PropTypes.arrayOf(bool).isRequired,
+  diet: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired,
+  dietName: PropTypes.string.isRequired,
 };
 
 export default DietCheckbox;
