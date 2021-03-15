@@ -8,18 +8,18 @@ import { connect } from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from 'components/Filter/Filter.module.scss';
-import { clearFilterCheckboxes as clearCheckboxes, handleCheckboxChange as checkboxChange } from '../../actions';
+import { clearFilterCheckboxes as clearCheckboxes } from 'actions/index';
 import DietCheckbox from './DietCheckbox/DietCheckbox';
 
-const Filter = ({ handleCheckboxChange, clearFilterCheckboxes, diet }) => (
+const Filter = ({ clearFilterCheckboxes, diet }) => (
   <form className={styles.filter}>
     <Container className='checkbox-list'>
       <h2>Dieta</h2>
-      <DietCheckbox handleCheckboxChange={handleCheckboxChange} diet={diet.meat} dietName="meat" label="Mięsna"/>
+      <DietCheckbox diet={diet.meat} dietName='meat' label='Mięsna' />
       <br />
-      <DietCheckbox handleCheckboxChange={handleCheckboxChange} diet={diet.vegetarian} dietName="vegetarian" label="Wegetariańska"/>
+      <DietCheckbox diet={diet.vegetarian} dietName='vegetarian' label='Wegetariańska' />
       <br />
-      <DietCheckbox handleCheckboxChange={handleCheckboxChange} diet={diet.vegan} dietName="vegan" label="Wegańska"/>
+      <DietCheckbox diet={diet.vegan} dietName='vegan' label='Wegańska' />
     </Container>
     <Row>
       <Col>
@@ -30,14 +30,12 @@ const Filter = ({ handleCheckboxChange, clearFilterCheckboxes, diet }) => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  handleCheckboxChange: event => dispatch(checkboxChange(event)),
   clearFilterCheckboxes: event => dispatch(clearCheckboxes(event)),
 });
 
 export default connect(null, mapDispatchToProps)(Filter);
 
 Filter.propTypes = {
-  handleCheckboxChange: PropTypes.func.isRequired,
   diet: PropTypes.objectOf(bool).isRequired,
   clearFilterCheckboxes: PropTypes.func.isRequired,
 };

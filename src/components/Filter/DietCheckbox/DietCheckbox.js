@@ -1,11 +1,14 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
+import { connect } from 'react-redux';
+import { handleCheckboxChange as checkboxChange } from 'actions/index';
+
 
 const DietCheckbox = ({diet, handleCheckboxChange, label, dietName }) => (
   <>
     <label htmlFor={dietName}>
       {label}
-      <input type="checkbox" id={dietName} value={diet} onChange={handleCheckboxChange} />
+      <input type="checkbox" id={dietName} checked={diet} onChange={handleCheckboxChange} />
     </label>
   </>
 );
@@ -18,4 +21,8 @@ DietCheckbox.propTypes = {
   dietName: PropTypes.string.isRequired,
 };
 
-export default DietCheckbox;
+const mapDispatchToProps = dispatch => ({
+  handleCheckboxChange: event => dispatch(checkboxChange(event)),
+});
+
+export default connect(null, mapDispatchToProps)(DietCheckbox);
