@@ -7,15 +7,16 @@ import AddRecipeView from 'views/AddRecipeView/AddRecipeView';
 import UserProfileView from 'views/UserProfileView/UserProfileView';
 
 const Root = () => (
-  <MainTemplate>
-    <BrowserRouter>
+  <BrowserRouter>
+    <MainTemplate>
       <Switch>
         <Route exact path='/' component={MainWrapper} />
         <Route exact path='/add-recipe' component={AddRecipeView} />
         <Route exact path='/user' component={UserProfileView} />
       </Switch>
-    </BrowserRouter>
-  </MainTemplate>
+    </MainTemplate>
+  </BrowserRouter>
+
 );
 
 export default Root;
