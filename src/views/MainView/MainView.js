@@ -2,15 +2,11 @@
 import React from 'react';
 import Filter from 'components/Filter/Filter';
 import RecipePreviewWrapper from 'components/RecipePreviewWrapper/RecipePreviewWrapper';
-import Header from 'components/Header/Header';
 import { connect } from 'react-redux';
-import { PropTypes, bool } from 'prop-types';
-import styles from './MainWrapper.module.scss';
+import { bool, PropTypes } from 'prop-types';
 
-const MainWrapper = ({ items, diet }) => (
-<div className={styles.wrapper}>
-  <Header/>
-  <div className={styles.main}>
+const MainView = ({ items, diet }) => (
+  <>
     <Filter
       diet={diet}
     />
@@ -18,15 +14,14 @@ const MainWrapper = ({ items, diet }) => (
       items={items}
       diet={diet}
     />
-  </div>
-</div>
+  </>
 );
 
 const mapStateToProps = ({ items, diet }) => ({ items, diet });
 
-export default connect(mapStateToProps, null)(MainWrapper);
+export default connect(mapStateToProps, null)(MainView);
 
-MainWrapper.propTypes = {
+MainView.propTypes = {
   diet: PropTypes.objectOf(bool).isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
