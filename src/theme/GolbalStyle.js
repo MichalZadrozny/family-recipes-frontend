@@ -16,16 +16,17 @@ html{
 }
 
 body{
-    margin: 0;
-	padding: 0;
-	background-color: #faf9f9;
-    font-size: 1.6rem;
-    font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #faf9f9;
+  font-size: 1.6rem;
+  font-family: "Roboto", sans-serif;
 }
 
 #root {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
 }
 
 `;
