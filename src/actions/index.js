@@ -12,3 +12,10 @@ export const clearFilterCheckboxes = (event) => ({
     event,
   },
 });
+
+export const addRecipe = (itemContent) => ({
+  type: 'ADD_ITEM',
+  payload: {
+    itemContent,
+  },
+});
