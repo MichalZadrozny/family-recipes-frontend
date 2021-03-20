@@ -6,45 +6,57 @@ import { PropTypes } from 'prop-types';
 import styles from './AddRecipeForm.module.scss';
 import StepInput from './StepInput/StepInput';
 
-// eslint-disable-next-line react/prefer-stateless-function
 class AddRecipeForm extends React.Component {
 
   // eslint-disable-next-line react/state-in-constructor
   state = {
-    // eslint-disable-next-line react/no-unused-state
-    ingredientCounter: 1,
+    stepCounter: 2,
+    initialValues: {
+      // image: '',
+      name: '',
+      description: '',
+      // ingredients: [],
+      diet: 'meat',
+      nutrients: {
+        calories: 0,
+        proteins: 0,
+        carbs: 0,
+        fats: 0,
+      },
+      steps: {
+        1: '',
+      },
+      time: '',
+    },
   };
 
   render() {
     const { addRecipe } = this.props;
-    // const { stepCounter, steps } = this.state;
+    const { initialValues } = this.state;
 
     const stepsMap = (steps, handleChange, handleBlur) => Object.keys(steps).map(key =>
       <StepInput key={key} index={key} steps={steps} handleChange={handleChange} handleBlur={handleBlur} />,
     );
+
+    const addStep = (values) => {
+      this.setState(prevState => ({
+        ...prevState,
+        initialValues: {
+          ...values,
+          steps: {
+            ...values.steps,
+            [prevState.stepCounter]: '',
+          },
+        },
+      }));
+      this.setState(prevState => ({ stepCounter: prevState.stepCounter + 1 }));
+    };
+
     return (
       <>
         <Formik
-          initialValues={{
-            // image: '',
-            name: '',
-            description: '',
-            // ingredients: [],
-            // steps: {},
-            diet: 'meat',
-            nutrients: {
-              calories: 0,
-              proteins: 0,
-              carbs: 0,
-              fats: 0,
-            },
-            steps: {
-              1: '',
-              2: '',
-              3: '',
-            },
-            time: '',
-          }}
+          enableReinitialize
+          initialValues={initialValues}
           onSubmit={(values, { setSubmitting, resetForm }) => {
             addRecipe(values);
             resetForm();
@@ -58,7 +70,6 @@ class AddRecipeForm extends React.Component {
               handleChange,
               handleBlur,
               handleSubmit,
-
               isSubmitting,
             }) => (
             <Form onSubmit={handleSubmit}>
@@ -94,6 +105,7 @@ class AddRecipeForm extends React.Component {
                 {
                   stepsMap(values.steps, handleChange, handleBlur)
                 }
+                <Button onClick={() => addStep(values)}>Dodaj kolejny krok</Button>
               </Form.Group>
               <Form.Group controlId='preparationTime'>
                 <Form.Label>Czas przygotowania</Form.Label>
