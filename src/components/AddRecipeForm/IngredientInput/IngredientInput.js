@@ -6,18 +6,31 @@ const IngredientInput = ({ index, ingredient, handleChange, handleBlur }) => (
   <InputGroup>
     <InputGroup.Prepend>
       <InputGroup.Text>
-        {index}
+        {index + 1}
       </InputGroup.Text>
     </InputGroup.Prepend>
-    <Form.Control type='text' placeholder='Ilość' value={ingredient.amount} name={`ingredients.${index - 1}.amount`}
-                  onChange={handleChange} onBlur={handleBlur} />
-    <Form.Control type='text' placeholder='Jednostka (może być puste)' value={ingredient.unit}
-                  name={`ingredients.${index - 1}.unit`}
-                  onChange={handleChange} onBlur={handleBlur} />
-    <Form.Control type='text' placeholder='Składnik' value={ingredient.name} name={`ingredients.${index - 1}.name`}
-                  onChange={handleChange} onBlur={handleBlur} />
+    <Form.Control
+      type='text'
+      placeholder='Ilość'
+      value={ingredient.amount}
+      name={`ingredients.${index}.amount`}
+      onChange={handleChange}
+      onBlur={handleBlur} />
+    <Form.Control
+      type='text'
+      placeholder='Jednostka (może być puste)'
+      value={ingredient.unit}
+      name={`ingredients.${index}.unit`}
+      onChange={handleChange}
+      onBlur={handleBlur} />
+    <Form.Control
+      type='text'
+      placeholder='Składnik'
+      value={ingredient.name}
+      name={`ingredients.${index}.name`}
+      onChange={handleChange}
+      onBlur={handleBlur} />
   </InputGroup>
-
 );
 
 export default IngredientInput;

@@ -49,7 +49,7 @@ class AddRecipeForm extends React.Component {
     const ingredientMap = (ingredients, handleChange, handleBlur) => (
       ingredients.map((ingredient, i) => (
           // eslint-disable-next-line react/no-array-index-key
-          <IngredientInput key={i + 1} index={i + 1} ingredient={ingredient} handleChange={handleChange}
+          <IngredientInput key={i} index={i} ingredient={ingredient} handleChange={handleChange}
                            handleBlur={handleBlur} />
         ),
       )
