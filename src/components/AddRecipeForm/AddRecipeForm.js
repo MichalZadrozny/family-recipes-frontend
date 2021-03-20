@@ -5,17 +5,25 @@ import { PropTypes } from 'prop-types';
 
 import styles from './AddRecipeForm.module.scss';
 import StepInput from './StepInput/StepInput';
+import IngredientInput from './IngredientInput/IngredientInput';
 
 class AddRecipeForm extends React.Component {
 
   // eslint-disable-next-line react/state-in-constructor
   state = {
     stepCounter: 2,
+    ingredientCounter: 2,
     initialValues: {
       // image: '',
       name: '',
       description: '',
-      // ingredients: [],
+      ingredients: [
+        {
+          name: '',
+          amount: '',
+          unit: '',
+        },
+      ],
       diet: 'meat',
       nutrients: {
         calories: 0,
@@ -38,6 +46,15 @@ class AddRecipeForm extends React.Component {
       <StepInput key={key} index={key} steps={steps} handleChange={handleChange} handleBlur={handleBlur} />,
     );
 
+    const ingredientMap = (ingredients, handleChange, handleBlur) => (
+      ingredients.map((ingredient, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <IngredientInput key={i + 1} index={i + 1} ingredient={ingredient} handleChange={handleChange}
+                           handleBlur={handleBlur} />
+        ),
+      )
+    );
+
     const addStep = (values) => {
       this.setState(prevState => ({
         ...prevState,
@@ -50,6 +67,24 @@ class AddRecipeForm extends React.Component {
         },
       }));
       this.setState(prevState => ({ stepCounter: prevState.stepCounter + 1 }));
+    };
+
+    const addIngredient = (values) => {
+      this.setState(prevState => ({
+        ...prevState,
+        initialValues: {
+          ...values,
+          ingredients: [
+            ...values.ingredients,
+            {
+              name: '',
+              amount: '',
+              unit: '',
+            },
+          ],
+        },
+      }));
+      this.setState(prevState => ({ ingredientCounter: prevState.ingredientCounter + 1 }));
     };
 
     return (
@@ -94,12 +129,13 @@ class AddRecipeForm extends React.Component {
                   onBlur={handleBlur}
                   value={values.description} />
               </Form.Group>
-              {/* <Form.Group>
-              <Form.Label>Składniki</Form.Label>
-              <Form.Control type='text' placeholder='1 składnik np. 2 jajka' />
-              <Form.Control type='text' placeholder='2 składnik np. 2 jajka' />
-              <Form.Control type='text' placeholder='3 składnik np. 2 jajka' />
-            </Form.Group> */}
+              <Form.Group>
+                <Form.Label>Składniki</Form.Label>
+                {
+                  ingredientMap(values.ingredients, handleChange, handleBlur)
+                }
+                <Button onClick={() => addIngredient(values)}>Dodaj kolejny składnik</Button>
+              </Form.Group>
               <Form.Group>
                 <Form.Label>Kroki do wykonania</Form.Label>
                 {
