@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Formik } from 'formik';
+import { withRouter } from 'react-router';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import { PropTypes } from 'prop-types';
 
 import styles from './AddRecipeForm.module.scss';
@@ -39,7 +41,7 @@ class AddRecipeForm extends React.Component {
   };
 
   render() {
-    const { addRecipe } = this.props;
+    const { addRecipe, history } = this.props;
     const { initialValues } = this.state;
 
     const stepsMap = (steps, handleChange, handleBlur) => Object.keys(steps).map(key =>
@@ -95,6 +97,7 @@ class AddRecipeForm extends React.Component {
           onSubmit={(values, { setSubmitting, resetForm }) => {
             addRecipe(values);
             resetForm();
+            history.push('/');
           }}
         >
 
@@ -202,8 +205,9 @@ class AddRecipeForm extends React.Component {
   }
 }
 
-export default AddRecipeForm;
+export default withRouter(AddRecipeForm);
 
 AddRecipeForm.propTypes = {
   addRecipe: PropTypes.func.isRequired,
+  history: ReactRouterPropTypes.history.isRequired,
 };

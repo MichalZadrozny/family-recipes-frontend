@@ -22,6 +22,7 @@
     "react-redux": "^7.2.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "react-router-prop-types": "^1.0.5",
     "react-scripts": "4.0.2",
     "redux": "^4.0.5",
     "styled-components": "^5.2.1",
