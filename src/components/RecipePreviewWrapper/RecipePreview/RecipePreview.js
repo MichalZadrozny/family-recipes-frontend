@@ -4,6 +4,7 @@ import styles from 'components/RecipePreviewWrapper/RecipePreview/RecipePreview.
 import Col from 'react-bootstrap/Col';
 import DietIcon from 'components/RecipePreviewWrapper/RecipePreview/DietIcon/DietIcon';
 import { faDrumstickBite, faEgg, faLeaf } from '@fortawesome/free-solid-svg-icons';
+import imageNotFound from 'assets/img/image-not-found.png';
 import RecipeRating from './RecipeRating/RecipeRating';
 
 const RecipePreview = ({ image, name, diet, time }) => (
@@ -39,7 +40,7 @@ RecipePreview.propTypes = {
 };
 
 RecipePreview.defaultProps = {
-  image: '/src/assets/img/image-not-found.png',
+  image: imageNotFound,
 };
 
 export default RecipePreview;
