@@ -26,7 +26,7 @@ class AddRecipeForm extends React.Component {
           unit: '',
         },
       ],
-      diet: 'meat',
+      diet: 'MEAT',
       nutrients: {
         calories: 0,
         proteins: 0,
@@ -164,9 +164,9 @@ class AddRecipeForm extends React.Component {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.diet}>
-                  <option value='meat'>Mięsna</option>
-                  <option value='vegetarian'>Wegetariańska</option>
-                  <option value='vegan'>Wegańska</option>
+                  <option value='MEAT'>Mięsna</option>
+                  <option value='VEGETARIAN'>Wegetariańska</option>
+                  <option value='VEGAN'>Wegańska</option>
                 </Form.Control>
               </Form.Group>
               <Form.Row className='align-items-center'>
