@@ -9,6 +9,7 @@ import * as Yup from 'yup';
 import styles from './AddRecipeForm.module.scss';
 import StepInput from './StepInput/StepInput';
 import IngredientInput from './IngredientInput/IngredientInput';
+import NutrientInput from './NutrientInput/NutrientInput';
 
 class AddRecipeForm extends React.Component {
 
@@ -66,15 +67,6 @@ class AddRecipeForm extends React.Component {
         .required('*Czas jest wymagany'),
     });
 
-    const initialTouched = {
-      nutrients: {
-        calories: '',
-        proteins: '',
-        carbs: '',
-        fats: '',
-      },
-    };
-
     const stepsMap = (steps, handleChange, handleBlur, touched, errors) => Object.keys(steps).map(key =>
       <StepInput key={key} index={key} steps={steps} handleChange={handleChange} handleBlur={handleBlur}
                  className={touched.steps && errors.steps ? styles.error : null} />,
@@ -128,8 +120,6 @@ class AddRecipeForm extends React.Component {
           enableReinitialize
           initialValues={initialValues}
           validationSchema={validationSchema}
-          initialTouched={initialTouched}
-          initialErrors={initialTouched}
 
           onSubmit={(values, { setSubmitting, resetForm }) => {
             setSubmitting(true);
@@ -229,42 +219,29 @@ class AddRecipeForm extends React.Component {
               <Form.Row className='align-items-center'>
                 <Col>
                   <Form.Label>Kalorie</Form.Label>
-                  <Form.Control type='text' placeholder='Kalorie' onChange={handleChange} onBlur={handleBlur}
-                                value={values.nutrients.calories} name='nutrients.calories'
-                                className={(touched.nutrients && touched.nutrients.calories) && (errors.nutrients && errors.nutrients.calories) ? styles.error : null} />
-                  {(touched.nutrients && touched.nutrients.calories) && (errors.nutrients && errors.nutrients.calories) ? (
-                    <div className={styles.errorMessage}>{errors.nutrients.calories}</div>
-                  ) : null}
+                  <NutrientInput name='calories' placeholder='Kalorie' nutrients={values.nutrients.calories}
+                                 errors={errors.nutrients} touched={touched.nutrients} handleChange={handleChange}
+                                 handleBlur={handleBlur} />
                 </Col>
                 <Col>
                   <Form.Label>Białka</Form.Label>
-                  <Form.Control type='text' placeholder='Białka' onChange={handleChange} onBlur={handleBlur}
-                                value={values.nutrients.proteins} name='nutrients.proteins'
-                                className={(touched.nutrients && touched.nutrients.proteins) && (errors.nutrients && errors.nutrients.proteins) ? styles.error : null} />
-                  {(touched.nutrients && touched.nutrients.proteins) && (errors.nutrients && errors.nutrients.proteins) ? (
-                    <div className={styles.errorMessage}>{errors.nutrients.proteins}</div>
-                  ) : null}
+                  <NutrientInput name='proteins' placeholder='Białka' nutrients={values.nutrients.proteins}
+                                 errors={errors.nutrients} touched={touched.nutrients} handleChange={handleChange}
+                                 handleBlur={handleBlur} />
                 </Col>
                 <Col>
                   <Form.Label>Tłuszcze</Form.Label>
-                  <Form.Control type='text' placeholder='Tłuszcze' onChange={handleChange} onBlur={handleBlur}
-                                value={values.nutrients.fats} name='nutrients.fats'
-                                className={(touched.nutrients && touched.nutrients.fats) && (errors.nutrients && errors.nutrients.fats) ? styles.error : null} />
-                  {(touched.nutrients && touched.nutrients.fats) && (errors.nutrients && errors.nutrients.fats) ? (
-                    <div className={styles.errorMessage}>{errors.nutrients.fats}</div>
-                  ) : null}
+                  <NutrientInput name='fats' placeholder='Tłuszcze' nutrients={values.nutrients.fats}
+                                 errors={errors.nutrients} touched={touched.nutrients} handleChange={handleChange}
+                                 handleBlur={handleBlur} />
                 </Col>
                 <Col>
                   <Form.Label>Węglowodany</Form.Label>
-                  <Form.Control type='text' placeholder='Węglowodany' onChange={handleChange} onBlur={handleBlur}
-                                value={values.nutrients.carbs} name='nutrients.carbs'
-                                className={(touched.nutrients && touched.nutrients.carbs) && (errors.nutrients && errors.nutrients.carbs) ? styles.error : null} />
-                  {(touched.nutrients && touched.nutrients.carbs) && (errors.nutrients && errors.nutrients.carbs) ? (
-                    <div className={styles.errorMessage}>{errors.nutrients.carbs}</div>
-                  ) : null}
+                  <NutrientInput name='carbs' placeholder='Węglowodany' nutrients={values.nutrients.carbs}
+                                 errors={errors.nutrients} touched={touched.nutrients} handleChange={handleChange}
+                                 handleBlur={handleBlur} />
                 </Col>
               </Form.Row>
-
               <Row className={styles.submit}>
                 <Button variant='primary' type='submit' disabled={isSubmitting}>
                   Submit
