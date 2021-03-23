@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const NutrientInput = ({ name, placeholder, nutrients, errors, touched, handleChange, handleBlur }) => (
   <>
     <Form.Control
-      type='text'
+      type='number'
       placeholder={placeholder}
       onChange={handleChange}
       onBlur={handleBlur}
@@ -25,7 +25,10 @@ export default NutrientInput;
 NutrientInput.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  nutrients: PropTypes.string,
+  nutrients: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   errors: PropTypes.objectOf(PropTypes.string),
   touched: PropTypes.objectOf(PropTypes.bool),
   handleChange: PropTypes.func.isRequired,
@@ -37,4 +40,3 @@ NutrientInput.defaultProps = {
   errors: {},
   touched: {},
 };
-

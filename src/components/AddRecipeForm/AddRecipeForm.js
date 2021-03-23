@@ -1,23 +1,25 @@
 import React from 'react';
-import { Button, Form, Row } from 'react-bootstrap';
-import { Formik } from 'formik';
+import { Button, Form, InputGroup, Row } from 'react-bootstrap';
+import { FieldArray, Formik } from 'formik';
 import { withRouter } from 'react-router';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { PropTypes } from 'prop-types';
 import * as Yup from 'yup';
 
 import styles from './AddRecipeForm.module.scss';
-import StepInput from './StepInput/StepInput';
-import IngredientInput from './IngredientInput/IngredientInput';
 import NutrientsFormPart from './NutrientsFormPart/NutrientsFormPart';
 
 class AddRecipeForm extends React.Component {
 
   // eslint-disable-next-line react/state-in-constructor
   state = {
-    stepCounter: 2,
-    ingredientCounter: 2,
-    initialValues: {
+    // stepCounter: 2,
+  };
+
+  render() {
+    const { addRecipe, history } = this.props;
+
+    const initialValues = {
       // image: '',
       name: '',
       description: '',
@@ -39,12 +41,7 @@ class AddRecipeForm extends React.Component {
         1: '',
       },
       time: '',
-    },
-  };
-
-  render() {
-    const { addRecipe, history } = this.props;
-    const { initialValues } = this.state;
+    };
 
     const validationSchema = Yup.object().shape({
       name: Yup.string()
@@ -52,7 +49,13 @@ class AddRecipeForm extends React.Component {
         .max(60, '*Nazwa nie może składać się z więcej niż 60 znaków')
         .required('*Przepis musi posiadać nazwę'),
       description: Yup.string(),
-      // ingredients: Yup.string().required(),
+      ingredients: Yup.array().of(
+        Yup.object().shape({
+          name: Yup.string().required('*Nazwa jest wymagana'),
+          amount: Yup.number().required('*Ilość jest wymagana').typeError('*Ilość musi być podana za pomocą liczby'),
+          unit: Yup.string(),
+        }),
+      ),
       nutrients: Yup.object().shape({
         calories: Yup.number().typeError('*Kalorie muszą być podane za pomocą liczby').positive('*Kalorie nie mogą być ujemne'),
         proteins: Yup.number().typeError('*Białka muszą być podane za pomocą liczby').positive('*Białka nie mogą być ujemne'),
@@ -67,119 +70,134 @@ class AddRecipeForm extends React.Component {
         .required('*Czas jest wymagany'),
     });
 
-    const stepsMap = (steps, handleChange, handleBlur, touched, errors) => Object.keys(steps).map(key =>
-      <StepInput key={key} index={key} steps={steps} handleChange={handleChange} handleBlur={handleBlur}
-                 className={touched.steps && errors.steps ? styles.error : null} />,
-    );
+    // const stepsMap = (steps, handleChange, handleBlur, touched, errors) => Object.keys(steps).map(key =>
+    //   <StepInput key={key} index={key} steps={steps} handleChange={handleChange} handleBlur={handleBlur}
+    //              className={touched.steps && errors.steps ? styles.error : null} />,
+    // );
 
-    const ingredientMap = (ingredients, handleChange, handleBlur, touched, errors) => (
-      ingredients.map((ingredient, i) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <IngredientInput key={i} index={i} ingredient={ingredient} handleChange={handleChange}
-                           handleBlur={handleBlur}
-                           className={touched.ingredients && errors.ingredients ? styles.error : null} />
-        ),
-      )
-    );
+    // const addStep = (values) => {
+    //   this.setState(prevState => ({
+    //     ...prevState,
+    //     initialValues: {
+    //       ...values,
+    //       steps: {
+    //         ...values.steps,
+    //         [prevState.stepCounter]: '',
+    //       },
+    //     },
+    //   }));
+    //   this.setState(prevState => ({ stepCounter: prevState.stepCounter + 1 }));
+    // };
 
-    const addStep = (values) => {
-      this.setState(prevState => ({
-        ...prevState,
-        initialValues: {
-          ...values,
-          steps: {
-            ...values.steps,
-            [prevState.stepCounter]: '',
-          },
-        },
-      }));
-      this.setState(prevState => ({ stepCounter: prevState.stepCounter + 1 }));
-    };
+    const form = (props) => (
+      <Form onSubmit={props.handleSubmit}>
+        <Form.Group controlId='name'>
+          <Form.Label>Nazwa przepisu</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Nazwa przepisu'
+            name='name'
+            onChange={props.handleChange}
+            onBlur={props.handleBlur}
+            value={props.values.name}
+            className={props.touched.name && props.errors.name ? styles.error : null} />
+          {props.touched.name && props.errors.name ? (
+            <div className={styles.errorMessage}>{props.errors.name}</div>
+          ) : null}
+        </Form.Group>
+        <Form.Group controlId='description'>
+          <Form.Label>Opis</Form.Label>
+          <Form.Control
+            as='textarea'
+            rows={3}
+            placeholder='Opis'
+            name='description'
+            onChange={props.handleChange}
+            onBlur={props.handleBlur}
+            value={props.values.description}
+            className={props.touched.description && props.errors.description ? styles.error : null} />
+          {props.touched.description && props.errors.description ? (
+            <div className={styles.errorMessage}>{props.errors.description}</div>
+          ) : null}
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Składniki</Form.Label>
 
-    const addIngredient = (values) => {
-      this.setState(prevState => ({
-        ...prevState,
-        initialValues: {
-          ...values,
-          ingredients: [
-            ...values.ingredients,
-            {
-              name: '',
-              amount: '',
-              unit: '',
-            },
-          ],
-        },
-      }));
-      this.setState(prevState => ({ ingredientCounter: prevState.ingredientCounter + 1 }));
-    };
-
-    return (
-      <>
-        <Formik
-          enableReinitialize
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-
-          onSubmit={(values, { setSubmitting, resetForm }) => {
-            setSubmitting(true);
-            addRecipe(values);
-            setSubmitting(false);
-            resetForm();
-            history.push('/');
-          }}
-        >
-
-          {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting,
-            }) => (
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId='name'>
-                <Form.Label>Nazwa przepisu</Form.Label>
-                <Form.Control
-                  type='text'
-                  placeholder='Nazwa przepisu'
-                  name='name'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.name}
-                  className={touched.name && errors.name ? styles.error : null} />
-                {touched.name && errors.name ? (
-                  <div className={styles.errorMessage}>{errors.name}</div>
-                ) : null}
-              </Form.Group>
-              <Form.Group controlId='description'>
-                <Form.Label>Opis</Form.Label>
-                <Form.Control
-                  as='textarea'
-                  rows={3}
-                  placeholder='Opis'
-                  name='description'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.description}
-                  className={touched.description && errors.description ? styles.error : null} />
-                {touched.description && errors.description ? (
-                  <div className={styles.errorMessage}>{errors.description}</div>
-                ) : null}
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Składniki</Form.Label>
+          <FieldArray
+            name='ingredients'
+            render={ingredientsArray => (
+              <div>
                 {
-                  ingredientMap(values.ingredients, handleChange, handleBlur, touched, errors)
-                }
-                {touched.ingredients && errors.ingredients ? (
-                  <div className={styles.errorMessage}>{errors.ingredients}</div>
-                ) : null}
-                <Button onClick={() => addIngredient(values)}>Dodaj kolejny składnik</Button>
-              </Form.Group>
-              <Form.Group>
+                  props.values.ingredients.map((item, index) => {
+                    const touchedIng = props.touched.ingredients;
+                    const errorsIng = props.errors.ingredients;
+                    return (
+
+                      // eslint-disable-next-line react/no-array-index-key
+                      <div key={index}>
+                        <InputGroup>
+                          <InputGroup.Prepend>
+                            <InputGroup.Text>
+                              {index + 1}
+                            </InputGroup.Text>
+                          </InputGroup.Prepend>
+
+                          <Form.Control
+                            name={`ingredients.${index}.amount`}
+                            type='number'
+                            placeholder='Ilość'
+                            onChange={props.handleChange}
+                            onBlur={props.handleBlur}
+                            className={(touchedIng && touchedIng[index] && touchedIng[index].amount) && (errorsIng && errorsIng[index] && errorsIng[index].amount) ? styles.error : null}
+                          /><br />
+
+                          <Form.Control
+                            name={`ingredients.${index}.unit`}
+                            onChange={props.handleChange}
+                            onBlur={props.handleBlur}
+                            placeholder='Jednostka'
+                          /><br />
+
+                          <Form.Control
+                            name={`ingredients.${index}.name`}
+                            placeholder='Nazwa'
+                            onChange={props.handleChange}
+                            onBlur={props.handleBlur}
+                            className={(touchedIng && touchedIng[index] && touchedIng[index].name) && (errorsIng && errorsIng[index] && errorsIng[index].name) ? styles.error : null}
+                          /><br />
+
+                          <button type='button'
+                                  onClick={() => ingredientsArray.remove(index)}> -
+                          </button>
+
+                          {(touchedIng && touchedIng[index] && touchedIng[index].amount) && (errorsIng && errorsIng[index] && errorsIng[index].amount) ? (
+                            <div className={styles.errorMessage}>{errorsIng[index].amount}</div>
+                          ) : null}
+
+                          {(touchedIng && touchedIng[index] && touchedIng[index].name) && (errorsIng && errorsIng[index] && errorsIng[index].name) ? (
+                            <div className={styles.errorMessage}>{errorsIng[index].name}</div>
+                          ) : null}
+
+                        </InputGroup>
+
+                      </div>
+
+                    );
+                  })}
+                <button type='button'
+                        onClick={() => ingredientsArray.push({
+                          name: '',
+                          amount: '',
+                          unit: '',
+                        })}> +
+                </button>
+              </div>
+            )}
+
+          />
+
+        </Form.Group>
+        {/* <Form.Group>
                 <Form.Label>Kroki do wykonania</Form.Label>
                 {
                   stepsMap(values.steps, handleChange, handleBlur, touched, errors)
@@ -188,47 +206,60 @@ class AddRecipeForm extends React.Component {
                   <div className={styles.errorMessage}>{errors.steps}</div>
                 ) : null}
                 <Button onClick={() => addStep(values)}>Dodaj kolejny krok</Button>
-              </Form.Group>
-              <Form.Group controlId='preparationTime'>
-                <Form.Label>Czas przygotowania</Form.Label>
-                <Form.Control
-                  type='text'
-                  placeholder='Czas przygotowania'
-                  name='time'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.time}
-                  className={touched.time && errors.time ? styles.error : null} />
-                {touched.time && errors.time ? (
-                  <div className={styles.errorMessage}>{errors.time}</div>
-                ) : null}
-              </Form.Group>
-              <Form.Group controlId='diet'>
-                <Form.Label>Dieta</Form.Label>
-                <Form.Control
-                  as='select'
-                  name='diet'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.diet}>
-                  <option value='MEAT'>Mięsna</option>
-                  <option value='VEGETARIAN'>Wegetariańska</option>
-                  <option value='VEGAN'>Wegańska</option>
-                </Form.Control>
-              </Form.Group>
+              </Form.Group> */}
+        <Form.Group controlId='preparationTime'>
+          <Form.Label>Czas przygotowania</Form.Label>
+          <Form.Control
+            type='number'
+            placeholder='Czas przygotowania'
+            name='time'
+            onChange={props.handleChange}
+            onBlur={props.handleBlur}
+            value={props.values.time}
+            className={props.touched.time && props.errors.time ? styles.error : null} />
+          {props.touched.time && props.errors.time ? (
+            <div className={styles.errorMessage}>{props.errors.time}</div>
+          ) : null}
+        </Form.Group>
+        <Form.Group controlId='diet'>
+          <Form.Label>Dieta</Form.Label>
+          <Form.Control
+            as='select'
+            name='diet'
+            onChange={props.handleChange}
+            onBlur={props.handleBlur}
+            value={props.values.diet}>
+            <option value='MEAT'>Mięsna</option>
+            <option value='VEGETARIAN'>Wegetariańska</option>
+            <option value='VEGAN'>Wegańska</option>
+          </Form.Control>
+        </Form.Group>
 
-              <NutrientsFormPart values={values} errors={errors} touched={touched} handleChange={handleChange}
-                                 handleBlur={handleBlur} />
+        <NutrientsFormPart values={props.values} errors={props.errors} touched={props.touched}
+                           handleChange={props.handleChange}
+                           handleBlur={props.handleBlur} />
 
-              <Row className={styles.submit}>
-                <Button variant='primary' type='submit' disabled={isSubmitting}>
-                  Submit
-                </Button>
-              </Row>
-            </Form>
-          )}
-        </Formik>
-      </>
+        <Row className={styles.submit}>
+          <Button variant='primary' type='submit' disabled={props.isSubmitting}>
+            Submit
+          </Button>
+        </Row>
+      </Form>
+    );
+
+    return (
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        render={form}
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          setSubmitting(true);
+          addRecipe(values);
+          setSubmitting(false);
+          resetForm();
+          history.push('/');
+        }}
+      />
     );
   }
 }
