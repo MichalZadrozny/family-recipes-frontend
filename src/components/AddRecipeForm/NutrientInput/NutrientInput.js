@@ -25,7 +25,7 @@ export default NutrientInput;
 NutrientInput.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  nutrients: PropTypes.string.isRequired,
+  nutrients: PropTypes.string,
   errors: PropTypes.objectOf(PropTypes.string),
   touched: PropTypes.objectOf(PropTypes.bool),
   handleChange: PropTypes.func.isRequired,
@@ -33,6 +33,7 @@ NutrientInput.propTypes = {
 };
 
 NutrientInput.defaultProps = {
+  nutrients: '',
   errors: {},
   touched: {},
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Button, Form, Row } from 'react-bootstrap';
 import { Formik } from 'formik';
 import { withRouter } from 'react-router';
 import ReactRouterPropTypes from 'react-router-prop-types';
@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import styles from './AddRecipeForm.module.scss';
 import StepInput from './StepInput/StepInput';
 import IngredientInput from './IngredientInput/IngredientInput';
-import NutrientInput from './NutrientInput/NutrientInput';
+import NutrientsFormPart from './NutrientsFormPart/NutrientsFormPart';
 
 class AddRecipeForm extends React.Component {
 
@@ -216,32 +216,10 @@ class AddRecipeForm extends React.Component {
                   <option value='VEGAN'>Wegańska</option>
                 </Form.Control>
               </Form.Group>
-              <Form.Row className='align-items-center'>
-                <Col>
-                  <Form.Label>Kalorie</Form.Label>
-                  <NutrientInput name='calories' placeholder='Kalorie' nutrients={values.nutrients.calories}
-                                 errors={errors.nutrients} touched={touched.nutrients} handleChange={handleChange}
+
+              <NutrientsFormPart values={values} errors={errors} touched={touched} handleChange={handleChange}
                                  handleBlur={handleBlur} />
-                </Col>
-                <Col>
-                  <Form.Label>Białka</Form.Label>
-                  <NutrientInput name='proteins' placeholder='Białka' nutrients={values.nutrients.proteins}
-                                 errors={errors.nutrients} touched={touched.nutrients} handleChange={handleChange}
-                                 handleBlur={handleBlur} />
-                </Col>
-                <Col>
-                  <Form.Label>Tłuszcze</Form.Label>
-                  <NutrientInput name='fats' placeholder='Tłuszcze' nutrients={values.nutrients.fats}
-                                 errors={errors.nutrients} touched={touched.nutrients} handleChange={handleChange}
-                                 handleBlur={handleBlur} />
-                </Col>
-                <Col>
-                  <Form.Label>Węglowodany</Form.Label>
-                  <NutrientInput name='carbs' placeholder='Węglowodany' nutrients={values.nutrients.carbs}
-                                 errors={errors.nutrients} touched={touched.nutrients} handleChange={handleChange}
-                                 handleBlur={handleBlur} />
-                </Col>
-              </Form.Row>
+
               <Row className={styles.submit}>
                 <Button variant='primary' type='submit' disabled={isSubmitting}>
                   Submit
