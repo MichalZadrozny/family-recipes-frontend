@@ -29,12 +29,12 @@ const initialState = {
           unit: 'mililitrów',
         },
       ],
-      steps: {
-        '1': 'Ugotuj bulion z porcji rosołowej, przypraw oraz warzyw. Następnie odcedź go.',
-        '2': 'Obierz ziemniaki, pokrój je w kostkę i dodaj do odcedzonego bulionu.',
-        '3': 'Umyj kurki, po czym dodaj je do wywaru wraz z kostkami rosołowymi Knorr oraz majerankiem. Gotuj całość do momentu, gdy ziemniaki będą miękkie.',
-        '4': 'Dolej do zupy piwo oraz śmietanę i mocno ją podgrzej. Podawaj porcje zupy, na talerzach, udekorowaną siekanym szczypiorkiem.',
-      },
+      steps: [
+        'Ugotuj bulion z porcji rosołowej, przypraw oraz warzyw. Następnie odcedź go.',
+        'Obierz ziemniaki, pokrój je w kostkę i dodaj do odcedzonego bulionu.',
+        'Umyj kurki, po czym dodaj je do wywaru wraz z kostkami rosołowymi Knorr oraz majerankiem. Gotuj całość do momentu, gdy ziemniaki będą miękkie.',
+        'Dolej do zupy piwo oraz śmietanę i mocno ją podgrzej. Podawaj porcje zupy, na talerzach, udekorowaną siekanym szczypiorkiem.',
+      ],
       diet: 'MEAT',
       nutrients: {
         calories: 338.0,
