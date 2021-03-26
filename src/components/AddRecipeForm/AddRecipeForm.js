@@ -22,7 +22,7 @@ const validationSchema = Yup.object().shape({
       amount: Yup.number().required('*Ilość jest wymagana').typeError('*Ilość musi być podana za pomocą liczby'),
       unit: Yup.string(),
     }),
-  ),
+  ).min(1, '*Przepus musi mieć co najmniej jeden składnik'),
   nutrients: Yup.object().shape({
     calories: Yup.number().typeError('*Kalorie muszą być podane za pomocą liczby').positive('*Kalorie nie mogą być ujemne'),
     proteins: Yup.number().typeError('*Białka muszą być podane za pomocą liczby').positive('*Białka nie mogą być ujemne'),
@@ -35,7 +35,7 @@ const validationSchema = Yup.object().shape({
         step: Yup.string().required('*Kroki do wykonania są wymagane'),
       },
     ),
-  ),
+  ).min(1, '*Przepus musi mieć co najmniej jeden krok'),
   time: Yup.number()
     .typeError('*Czas musi być podany za pomocą liczby')
     .positive('*Czas musi być większy od 0')
@@ -78,83 +78,87 @@ const form = (props) => (
 
       <FieldArray
         name='ingredients'
-        render={ingredientsArray => (
-          <div>
-            {
-              props.values.ingredients.map((item, index) => {
-                const touchedIng = props.touched.ingredients;
-                const errorsIng = props.errors.ingredients;
+        render={
+          ingredientsArray => (
+            <div>
+              {
+                props.values.ingredients.map((item, index) => {
+                  const touchedIng = props.touched.ingredients;
+                  const errorsIng = props.errors.ingredients;
 
-                return (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <div key={index}>
-                    <InputGroup>
-                      <InputGroup.Prepend>
-                        <InputGroup.Text>
-                          {index + 1}
-                        </InputGroup.Text>
-                      </InputGroup.Prepend>
+                  return (
+                    <div key={item.id}>
+                      <InputGroup>
+                        <InputGroup.Prepend>
+                          <InputGroup.Text>
+                            {index + 1}
+                          </InputGroup.Text>
+                        </InputGroup.Prepend>
 
-                      <Form.Control
-                        name={`ingredients.${index}.amount`}
-                        type='number'
-                        placeholder='Ilość'
-                        onChange={props.handleChange}
-                        onBlur={props.handleBlur}
-                        className={(touchedIng && touchedIng[index] && touchedIng[index].amount) && (errorsIng && errorsIng[index] && errorsIng[index].amount) ? styles.error : null}
-                      /><br />
+                        <Form.Control
+                          name={`ingredients.${index}.amount`}
+                          type='number'
+                          placeholder='Ilość'
+                          onChange={props.handleChange}
+                          onBlur={props.handleBlur}
+                          className={(touchedIng && touchedIng[index] && touchedIng[index].amount) && (errorsIng && errorsIng[index] && errorsIng[index].amount) ? styles.error : null}
+                        /><br />
 
-                      <Form.Control
-                        name={`ingredients.${index}.unit`}
-                        onChange={props.handleChange}
-                        onBlur={props.handleBlur}
-                        placeholder='Jednostka'
-                      /><br />
+                        <Form.Control
+                          name={`ingredients.${index}.unit`}
+                          onChange={props.handleChange}
+                          onBlur={props.handleBlur}
+                          placeholder='Jednostka'
+                        /><br />
 
-                      <Form.Control
-                        name={`ingredients.${index}.name`}
-                        placeholder='Nazwa'
-                        onChange={props.handleChange}
-                        onBlur={props.handleBlur}
-                        className={(touchedIng && touchedIng[index] && touchedIng[index].name) && (errorsIng && errorsIng[index] && errorsIng[index].name) ? styles.error : null}
-                      /><br />
+                        <Form.Control
+                          name={`ingredients.${index}.name`}
+                          placeholder='Nazwa'
+                          onChange={props.handleChange}
+                          onBlur={props.handleBlur}
+                          className={(touchedIng && touchedIng[index] && touchedIng[index].name) && (errorsIng && errorsIng[index] && errorsIng[index].name) ? styles.error : null}
+                        /><br />
 
-                      <button type='button'
-                              onClick={() => ingredientsArray.remove(index)}> -
-                      </button>
+                        <button type='button'
+                                onClick={() => ingredientsArray.remove(index)}> -
+                        </button>
 
-                      {(touchedIng && touchedIng[index] && touchedIng[index].amount) && (errorsIng && errorsIng[index] && errorsIng[index].amount) ? (
-                        <div className={styles.errorMessage}>{errorsIng[index].amount}</div>
-                      ) : null}
+                        {(touchedIng && touchedIng[index] && touchedIng[index].amount) && (errorsIng && errorsIng[index] && errorsIng[index].amount) ? (
+                          <div className={styles.errorMessage}>{errorsIng[index].amount}</div>
+                        ) : null}
 
-                      {(touchedIng && touchedIng[index] && touchedIng[index].name) && (errorsIng && errorsIng[index] && errorsIng[index].name) ? (
-                        <div className={styles.errorMessage}>{errorsIng[index].name}</div>
-                      ) : null}
+                        {(touchedIng && touchedIng[index] && touchedIng[index].name) && (errorsIng && errorsIng[index] && errorsIng[index].name) ? (
+                          <div className={styles.errorMessage}>{errorsIng[index].name}</div>
+                        ) : null}
 
-                    </InputGroup>
+                      </InputGroup>
 
-                  </div>
+                    </div>
 
-                );
-              })}
-            <button type='button'
-                    onClick={() => ingredientsArray.push({
-                      id: shortid.generate(),
-                      name: '',
-                      amount: '',
-                      unit: '',
-                    })}> +
-            </button>
-          </div>
-        )}
+                  );
+                })}
+              <button type='button'
+                      onClick={() => ingredientsArray.push({
+                        id: shortid.generate(),
+                        name: '',
+                        amount: '',
+                        unit: '',
+                      })}> +
+              </button>
+            </div>
+          )}
 
       />
 
+      {
+        props.errors.ingredients && (typeof (props.errors.ingredients) === 'string') ? (
+          <div className={styles.errorMessage}>{props.errors.ingredients}</div>
+        ) : null
+      }
     </Form.Group>
 
     <Form.Group>
       <Form.Label>Kroki do wykonania</Form.Label>
-
       <FieldArray
         name='steps'
         render={stepsArray => (
@@ -191,9 +195,7 @@ const form = (props) => (
                       ) : null}
 
                     </InputGroup>
-
                   </div>
-
                 );
               })}
             <button type='button'
@@ -209,7 +211,14 @@ const form = (props) => (
           </div>
         )}
       />
+
+      {
+        props.errors.steps && (typeof (props.errors.steps) === 'string') ? (
+          <div className={styles.errorMessage}>{props.errors.steps}</div>
+        ) : null
+      }
     </Form.Group>
+
     <Form.Group controlId='preparationTime'>
       <Form.Label>Czas przygotowania</Form.Label>
       <Form.Control
