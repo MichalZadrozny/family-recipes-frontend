@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { PropTypes } from 'prop-types';
 import * as Yup from 'yup';
+import shortid from 'shortid';
 
 import styles from './AddRecipeForm.module.scss';
 import NutrientsFormPart from './NutrientsFormPart/NutrientsFormPart';
@@ -30,7 +31,10 @@ const validationSchema = Yup.object().shape({
   }),
 
   steps: Yup.array().of(
-    Yup.string().required('*Kroki do wykonania są wymagane'),
+    Yup.object().shape({
+        step: Yup.string().required('*Kroki do wykonania są wymagane'),
+      },
+    ),
   ),
   time: Yup.number()
     .typeError('*Czas musi być podany za pomocą liczby')
@@ -80,8 +84,8 @@ const form = (props) => (
               props.values.ingredients.map((item, index) => {
                 const touchedIng = props.touched.ingredients;
                 const errorsIng = props.errors.ingredients;
-                return (
 
+                return (
                   // eslint-disable-next-line react/no-array-index-key
                   <div key={index}>
                     <InputGroup>
@@ -135,6 +139,7 @@ const form = (props) => (
               })}
             <button type='button'
                     onClick={() => ingredientsArray.push({
+                      id: shortid.generate(),
                       name: '',
                       amount: '',
                       unit: '',
@@ -147,7 +152,6 @@ const form = (props) => (
 
     </Form.Group>
 
-
     <Form.Group>
       <Form.Label>Kroki do wykonania</Form.Label>
 
@@ -159,10 +163,9 @@ const form = (props) => (
               props.values.steps.map((item, index) => {
                 const touchedSteps = props.touched.steps;
                 const errorsSteps = props.errors.steps;
-                return (
 
-                  // eslint-disable-next-line react/no-array-index-key
-                  <div key={index}>
+                return (
+                  <div key={item.id}>
                     <InputGroup>
                       <InputGroup.Prepend>
                         <InputGroup.Text>
@@ -171,20 +174,20 @@ const form = (props) => (
                       </InputGroup.Prepend>
 
                       <Form.Control
-                        name={`steps.${index}`}
+                        name={`steps.${index}.step`}
                         type='text'
                         placeholder={`${index + 1} składnik`}
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
-                        className={(touchedSteps && touchedSteps[index]) && (errorsSteps && errorsSteps[index]) ? styles.error : null}
+                        className={(touchedSteps && touchedSteps[index] && touchedSteps[index].step) && (errorsSteps && errorsSteps[index] && errorsSteps[index].step) ? styles.error : null}
                       /><br />
 
                       <button type='button'
                               onClick={() => stepsArray.remove(index)}> -
                       </button>
 
-                      {(touchedSteps && touchedSteps[index]) && (errorsSteps && errorsSteps[index]) ? (
-                        <div className={styles.errorMessage}>{errorsSteps[index]}</div>
+                      {(touchedSteps && touchedSteps[index] && touchedSteps[index].step) && (errorsSteps && errorsSteps[index] && errorsSteps[index].step) ? (
+                        <div className={styles.errorMessage}>{errorsSteps[index].step}</div>
                       ) : null}
 
                     </InputGroup>
@@ -196,7 +199,10 @@ const form = (props) => (
             <button type='button'
                     onClick={() =>
                       stepsArray.push(
-                        '',
+                        {
+                          id: shortid.generate(),
+                          step: '',
+                        },
                       )
                     }> +
             </button>
@@ -244,12 +250,30 @@ const form = (props) => (
   </Form>
 );
 
+const removeIDs = (values) => {
+  // eslint-disable-next-line no-param-reassign
+  values.forEach(value => delete value.id);
+
+  return values;
+};
+
+const mapStepsToStringArray = (values) => {
+
+  const newValues = [];
+
+  values.forEach(value => newValues.push(value.step));
+
+  return newValues;
+};
+
+
 const initialValues = {
   // image: '',
   name: '',
   description: '',
   ingredients: [
     {
+      id: shortid.generate(),
       name: '',
       amount: '',
       unit: '',
@@ -263,7 +287,10 @@ const initialValues = {
     fats: '',
   },
   steps: [
-    '',
+    {
+      id: shortid.generate(),
+      step: '',
+    },
   ],
   time: '',
 };
@@ -275,6 +302,13 @@ const AddRecipeForm = ({ addRecipe, history }) => (
     render={form}
     onSubmit={(values, { setSubmitting, resetForm }) => {
       setSubmitting(true);
+
+      // eslint-disable-next-line no-param-reassign
+      values.ingredients = removeIDs(values.ingredients);
+
+      // eslint-disable-next-line no-param-reassign
+      values.steps = mapStepsToStringArray(values.steps);
+
       addRecipe(values);
       setSubmitting(false);
       resetForm();
