@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import { withRouter } from 'react-router';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Form, Row } from 'react-bootstrap';
+import { PropTypes } from 'prop-types';
+
 import styles from './LoginForm.module.scss';
 
 const validationSchema = Yup.object().shape({
@@ -57,7 +60,7 @@ const form = (props) => (
   </Form>
 );
 
-const LoginForm = ({ history }) => (
+const LoginForm = ({ history, close }) => (
   <Formik
     initialValues={initialValues}
     validationSchema={validationSchema}
@@ -66,13 +69,15 @@ const LoginForm = ({ history }) => (
       setSubmitting(true);
       setSubmitting(false);
       resetForm();
+      close();
       history.push('/');
     }}
   />
 );
 
-export default LoginForm;
+export default withRouter(LoginForm);
 
 LoginForm.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
+  close: PropTypes.func.isRequired,
 };
