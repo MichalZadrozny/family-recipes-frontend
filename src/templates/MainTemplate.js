@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import store from 'store';
+import store from 'redux/store';
 import GlobalStyle from 'theme/GolbalStyle';
 import styles from 'templates/MainTemplate.module.scss';
 
