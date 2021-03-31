@@ -26,6 +26,7 @@
     "react-router-prop-types": "^1.0.5",
     "react-scripts": "4.0.2",
     "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "shortid": "^2.2.16",
     "styled-components": "^5.2.1",
     "web-vitals": "^1.1.0",

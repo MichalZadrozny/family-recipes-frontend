@@ -1,4 +1,5 @@
 import React from 'react';
+import { ADD_ITEM, AUTHENTICATE_SUCCESS, CHANGE_CHECKBOX, CLEAR_FILTER_CHECKBOXES } from 'actions';
 
 const initialState = {
   items: [
@@ -76,7 +77,7 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case('CHANGE_CHECKBOX'):
+    case(CHANGE_CHECKBOX):
       return {
         ...state,
         diet: {
@@ -84,7 +85,7 @@ const rootReducer = (state = initialState, action) => {
           [action.payload.event.target.id]: !state.diet[action.payload.event.target.id],
         },
       };
-    case('CLEAR_FILTER_CHECKBOXES'):
+    case(CLEAR_FILTER_CHECKBOXES):
       return {
         ...state,
         diet: {
@@ -93,13 +94,19 @@ const rootReducer = (state = initialState, action) => {
           meat: false,
         },
       };
-    case('ADD_ITEM'):
+    case(ADD_ITEM):
       return {
         ...state,
         items: [
           ...state.items,
           action.payload.itemContent,
         ],
+      };
+    case(AUTHENTICATE_SUCCESS):
+      console.log(action.payload.data.token);
+      return {
+        ...state,
+        token: action.payload.data.token,
       };
     default:
       return state;
