@@ -17,8 +17,10 @@ const MainView = ({ items, diet }) => (
   </>
 );
 
-const mapStateToProps = ({ items, diet }) => ({ items, diet });
-
+const mapStateToProps = (state) => {
+  const { recipes } = state;
+  return recipes;
+};
 export default connect(mapStateToProps, null)(MainView);
 
 MainView.propTypes = {

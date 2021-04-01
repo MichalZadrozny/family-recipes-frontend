@@ -1,4 +1,8 @@
 import axios from 'axios';
+import userConstants from '../constants/user.constants';
+import userService from '../services/user.service';
+import history from '../helpers/history';
+import alertActions from './alert.actions';
 
 export const CHANGE_CHECKBOX = 'CHANGE_CHECKBOX';
 export const CLEAR_FILTER_CHECKBOXES = 'CLEAR_FILTER_CHECKBOXES';
@@ -43,4 +47,42 @@ export const authenticate = (username, password) => dispatch => {
       console.log(err);
       dispatch({ type: AUTHENTICATE_FAILURE });
     });
+};
+
+export const login = (username, password) => {
+
+  function request(user) {
+    return { type: userConstants.LOGIN_REQUEST, user };
+  }
+
+  function success(user) {
+    return { type: userConstants.LOGIN_SUCCESS, user };
+  }
+
+  function failure(error) {
+    return { type: userConstants.LOGIN_FAILURE, error };
+  }
+
+  console.log('TEST 111');
+
+  return dispatch => {
+
+    console.log('TEST 2');
+
+    dispatch(request({ username }));
+
+    console.log('TEST 3');
+
+    userService.login(username, password)
+      .then(
+        user => {
+          dispatch(success(user));
+          history.push('/');
+        },
+        error => {
+          dispatch(failure(error.toString()));
+          dispatch(alertActions.error(error.toString()));
+        },
+      );
+  };
 };

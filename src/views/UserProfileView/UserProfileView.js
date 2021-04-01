@@ -1,9 +1,8 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
-const UserProfileView = () => (
-  <>
-    <h1>User profile</h1>
-  </>
-);
+import ProfileMenu from 'components/ProfileMenu/ProfileMenu';
+
+const UserProfileView = () => localStorage.getItem('user') ? <ProfileMenu /> : <Redirect to='/login' />;
 
 export default UserProfileView;
