@@ -81,7 +81,6 @@ const LoginForm = ({ history, close, login }) => (
 
 const mapDispatchToProps = dispatch => ({
   login: (username, password) => dispatch(userActions.login(username, password)),
-  logout: userActions.logout,
 });
 
 export default compose(withRouter, connect(null, mapDispatchToProps))(LoginForm);

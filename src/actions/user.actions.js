@@ -35,10 +35,10 @@ const login = (username, password) => {
   };
 };
 
-function logout() {
+const logout = () => {
   userService.logout();
   return { type: userConstants.LOGOUT };
-}
+};
 
 function register(user) {
   // eslint-disable-next-line no-shadow

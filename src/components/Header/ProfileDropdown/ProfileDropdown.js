@@ -6,6 +6,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './ProfileDropdown.module.scss';
 import LoginDropdownItem from './LoginDropdownItem/LoginDropdownItem';
+import LogoutDropdownItem from './LogoutDropdownItem/LogoutDropdownItem';
 
 
 const ProfileDropdown = () => (
@@ -14,10 +15,17 @@ const ProfileDropdown = () => (
         <FontAwesomeIcon icon={faUser} className={styles.userIcon} />
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item as={NavLink} to='/user' bsPrefix={styles.dropdownItem}>
-          Profile
-        </Dropdown.Item>
-        <LoginDropdownItem />
+        {
+          localStorage.getItem('user') ?
+            <>
+              <Dropdown.Item as={NavLink} to='/user' bsPrefix={styles.dropdownItem}>
+                Profile
+              </Dropdown.Item>
+              <LogoutDropdownItem />
+            </>
+            : <LoginDropdownItem />
+        }
+
       </Dropdown.Menu>
     </Dropdown>
   )
