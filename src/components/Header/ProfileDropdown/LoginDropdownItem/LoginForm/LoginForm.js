@@ -9,8 +9,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import userActions from 'actions/user.actions';
-// import { authenticate as authenticateAction } from 'actions/index';
-import { login as loginAction } from 'actions/index';
 import styles from './LoginForm.module.scss';
 
 const validationSchema = Yup.object().shape({
@@ -65,27 +63,24 @@ const form = (props) => (
   </Form>
 );
 
-const LoginForm = ({ history, close, authenticate, login }) => (
+const LoginForm = ({ history, close, login }) => (
   <Formik
     initialValues={initialValues}
     validationSchema={validationSchema}
     render={form}
     onSubmit={({ username, password }, { setSubmitting, resetForm }) => {
       setSubmitting(true);
-      // authenticate(username, password);
-
       login(username, password);
       close();
       resetForm();
-      // history.push('/');
+      history.push('/');
       setSubmitting(false);
     }}
   />
 );
 
 const mapDispatchToProps = dispatch => ({
-  // authenticate: (username, password) => dispatch(authenticateAction(username, password)),
-  login: (username, password) => dispatch(loginAction(username, password)),
+  login: (username, password) => dispatch(userActions.login(username, password)),
   logout: userActions.logout,
 });
 
@@ -93,7 +88,6 @@ export default compose(withRouter, connect(null, mapDispatchToProps))(LoginForm)
 
 LoginForm.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
-  authenticate: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
 };

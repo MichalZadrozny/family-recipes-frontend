@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { addRecipe as addRecipeAction } from 'actions/index';
+import { addRecipe as addRecipeAction } from 'actions/recipe.actions';
 import { PropTypes } from 'prop-types';
 
 import styles from './AddRecipeView.module.scss';

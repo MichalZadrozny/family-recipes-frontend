@@ -3,12 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import { PropTypes, bool } from 'prop-types';
+import { bool, PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from 'components/Filter/Filter.module.scss';
-import { clearFilterCheckboxes as clearCheckboxes } from 'actions/index';
+import { clearFilterCheckboxes as clearCheckboxes } from 'actions/filter.actions';
 import DietCheckbox from './DietCheckbox/DietCheckbox';
 
 const Filter = ({ clearFilterCheckboxes, diet }) => (

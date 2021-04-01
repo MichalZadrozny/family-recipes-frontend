@@ -1,21 +1,19 @@
 import React from 'react';
-import {PropTypes} from 'prop-types';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { handleCheckboxChange as checkboxChange } from 'actions/index';
+import { handleCheckboxChange as checkboxChange } from 'actions/filter.actions';
 
-
-const DietCheckbox = ({diet, handleCheckboxChange, label, dietName }) => (
+const DietCheckbox = ({ diet, handleCheckboxChange, label, dietName }) => (
   <>
     <label htmlFor={dietName}>
       {label}
-      <input type="checkbox" id={dietName} checked={diet} onChange={handleCheckboxChange} />
+      <input type='checkbox' id={dietName} checked={diet} onChange={handleCheckboxChange} />
     </label>
   </>
 );
 
-
 DietCheckbox.propTypes = {
-  handleCheckboxChange: PropTypes.func.isRequired, 
+  handleCheckboxChange: PropTypes.func.isRequired,
   diet: PropTypes.bool.isRequired,
   label: PropTypes.string.isRequired,
   dietName: PropTypes.string.isRequired,

@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import Filter from 'components/Filter/Filter';
 import RecipePreviewWrapper from 'components/RecipePreviewWrapper/RecipePreviewWrapper';
@@ -18,8 +17,12 @@ const MainView = ({ items, diet }) => (
 );
 
 const mapStateToProps = (state) => {
-  const { recipes } = state;
-  return recipes;
+  const { items } = state.recipes;
+  const { diet } = state.filter;
+  return {
+    items,
+    diet,
+  };
 };
 export default connect(mapStateToProps, null)(MainView);
 

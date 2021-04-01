@@ -14,7 +14,6 @@ const Root = () => (
         <Route exact path='/' component={MainWrapper} />
         <Route exact path='/add-recipe' component={AddRecipeView} />
         <Route exact path='/user' component={UserProfileView} />
-        {/* <Route exact path='/login' component={LoginPage} /> */}
         <Route exact path='/login' component={LoginView} />
       </Switch>
     </MainTemplate>

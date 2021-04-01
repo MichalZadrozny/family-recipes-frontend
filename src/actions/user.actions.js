@@ -3,34 +3,37 @@ import alertActions from 'actions/alert.actions';
 import history from 'helpers/history';
 import userService from 'services/user.service';
 
-// function login(username, password) {
-//   function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
-//   function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
-//   function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
-//
-//   console.log("TEST 1")
-//
-//   return dispatch => {
-//
-//     console.log("TEST 2")
-//
-//     dispatch(request({ username }));
-//
-//     console.log("TEST 3")
-//
-//     userService.login(username, password)
-//       .then(
-//         user => {
-//           dispatch(success(user));
-//           history.push('/');
-//         },
-//         error => {
-//           dispatch(failure(error.toString()));
-//           dispatch(alertActions.error(error.toString()));
-//         }
-//       );
-//   };
-// }
+const login = (username, password) => {
+
+  function request(user) {
+    return { type: userConstants.LOGIN_REQUEST, user };
+  }
+
+  function success(user) {
+    return { type: userConstants.LOGIN_SUCCESS, user };
+  }
+
+  function failure(error) {
+    return { type: userConstants.LOGIN_FAILURE, error };
+  }
+
+  return dispatch => {
+
+    dispatch(request({ username }));
+
+    userService.login(username, password)
+      .then(
+        user => {
+          dispatch(success(user));
+          history.push('/');
+        },
+        error => {
+          dispatch(failure(error.toString()));
+          dispatch(alertActions.error(error.toString()));
+        },
+      );
+  };
+};
 
 function logout() {
   userService.logout();
@@ -56,9 +59,7 @@ function register(user) {
     dispatch(request(user));
 
     userService.register(user)
-      .then(
-        // eslint-disable-next-line no-shadow
-        user => {
+      .then(() => {
           dispatch(success());
           history.push('/login');
           dispatch(alertActions.success('Registration successful'));
@@ -117,15 +118,14 @@ function _delete(id) {
     dispatch(request(id));
 
     userService.delete(id)
-      .then(
-        user => dispatch(success(id)),
+      .then(() => dispatch(success(id)),
         error => dispatch(failure(id, error.toString())),
       );
   };
 }
 
 export default {
-  // login,
+  login,
   logout,
   register,
   getAll,
