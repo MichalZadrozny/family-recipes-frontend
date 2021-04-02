@@ -3,18 +3,22 @@ import { withRouter } from 'react-router';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
 import LoginModal from 'components/Header/ProfileDropdown/LoginDropdownItem/LoginModal/LoginModal';
+import MainView from '../MainView/MainView';
 
 const LoginView = ({ history }) => {
   const [modalShow, setModalShow] = React.useState(true);
 
   return (
-    <LoginModal
-      show={modalShow}
-      onHide={() => {
-        setModalShow(false);
-        history.push('/');
-      }}
-    />
+    <>
+      <MainView />
+      <LoginModal
+        show={modalShow}
+        onHide={() => {
+          setModalShow(false);
+          history.push('/');
+        }}
+      />
+    </>
   );
 };
 
