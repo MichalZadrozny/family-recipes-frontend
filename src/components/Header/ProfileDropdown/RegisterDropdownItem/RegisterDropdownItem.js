@@ -4,27 +4,26 @@ import { withRouter } from 'react-router';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
 import FormModal from 'components/Forms/FormModal/FormModal';
-import LoginForm from 'components/Forms/LoginForm/LoginForm';
-import styles from './LoginDropdownItem.module.scss';
+import RegisterForm from 'components/Forms/RegisterForm/RegisterForm';
+import styles from './RegisterDropdownItem.module.scss';
 
-const LoginDropdownItem = ({ history }) => {
+const RegisterDropdownItem = ({ history }) => {
   const [modalShow, setModalShow] = React.useState(false);
   const onHide = () => {
     setModalShow(false);
     history.push('/');
   };
-  const form = <LoginForm close={onHide} />;
+  const form = <RegisterForm close={onHide} />;
 
   return (
     <>
       <Dropdown.Item
-        onClick={() => setModalShow(true)}
+        onClick={() => setModalShow(true)} active={false}
         bsPrefix={styles.dropdownItem}>
-        Logowanie
+        Rejestracja
       </Dropdown.Item>
-
       <FormModal
-        title='Logowanie'
+        title='Rejestracja'
         show={modalShow}
         onHide={onHide}
         form={form}
@@ -33,8 +32,8 @@ const LoginDropdownItem = ({ history }) => {
   );
 };
 
-export default withRouter(LoginDropdownItem);
+export default withRouter(RegisterDropdownItem);
 
-LoginDropdownItem.propTypes = {
+RegisterDropdownItem.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
 };

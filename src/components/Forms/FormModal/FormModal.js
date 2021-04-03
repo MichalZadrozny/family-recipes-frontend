@@ -2,9 +2,7 @@ import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { PropTypes } from 'prop-types';
 
-import LoginForm from '../LoginForm/LoginForm';
-
-const LoginModal = ({ onHide, show }) => (
+const FormModal = ({ onHide, show, title, form }) => (
   <Modal
     show={show}
     onHide={onHide}
@@ -14,21 +12,23 @@ const LoginModal = ({ onHide, show }) => (
   >
     <Modal.Header closeButton>
       <Modal.Title id='contained-modal-title-vcenter'>
-        Login
+        {title}
       </Modal.Title>
     </Modal.Header>
     <Modal.Body>
-      <LoginForm close={onHide} />
+      {form}
     </Modal.Body>
     <Modal.Footer>
-      <Button onClick={onHide}>Close</Button>
+      <Button onClick={onHide}>Zamknij</Button>
     </Modal.Footer>
   </Modal>
 );
 
-export default LoginModal;
+export default FormModal;
 
-LoginModal.propTypes = {
+FormModal.propTypes = {
   onHide: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  form: PropTypes.elementType.isRequired,
 };

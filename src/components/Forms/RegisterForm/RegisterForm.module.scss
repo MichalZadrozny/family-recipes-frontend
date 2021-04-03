@@ -1,0 +1,16 @@
+.submit {
+  display: flex;
+  justify-content: center;
+  padding: 5rem;
+}
+
+.error {
+  border: 2px solid #FF6565;
+}
+
+.errorMessage {
+  color: #FF6565;
+  padding: 0.5em 0.2em .8em .2em;
+  height: 1em;
+  font-size: .8em;
+}

@@ -1,16 +1,16 @@
 import alertConstants from 'constants/alert.constants';
 
-function success(message) {
-  return { type: alertConstants.SUCCESS, message };
-}
+const success = (message) => ({
+  type: alertConstants.SUCCESS, message,
+});
 
-function error(message) {
-  return { type: alertConstants.ERROR, message };
-}
+const error = (message) => ({
+  type: alertConstants.ERROR, message,
+});
 
-function clear() {
-  return { type: alertConstants.CLEAR };
-}
+const clear = () => ({
+  type: alertConstants.CLEAR,
+});
 
 export default {
   success,

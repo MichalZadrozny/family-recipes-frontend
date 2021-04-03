@@ -3,21 +3,21 @@ import { withRouter } from 'react-router';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
 import MainView from 'views/MainView/MainView';
-import LoginForm from 'components/Forms/LoginForm/LoginForm';
 import FormModal from 'components/Forms/FormModal/FormModal';
+import RegisterForm from 'components/Forms/RegisterForm/RegisterForm';
 
-const LoginView = ({ history }) => {
+const RegisterView = ({ history }) => {
   const [modalShow, setModalShow] = React.useState(true);
   const onHide = () => {
     setModalShow(false);
     history.push('/');
   };
-  const form = <LoginForm close={onHide} />;
+  const form = <RegisterForm close={onHide} />;
 
   return (
     <>
       <FormModal
-        title='Login'
+        title='Zarejetruj'
         show={modalShow}
         onHide={onHide}
         form={form}
@@ -27,8 +27,8 @@ const LoginView = ({ history }) => {
   );
 };
 
-export default withRouter(LoginView);
+export default withRouter(RegisterView);
 
-LoginView.propTypes = {
+RegisterView.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
 };

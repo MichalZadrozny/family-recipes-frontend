@@ -57,7 +57,7 @@ const form = (props) => (
 
     <Row className={styles.submit}>
       <Button variant='primary' type='submit' disabled={props.isSubmitting}>
-        Submit
+        Wyślij
       </Button>
     </Row>
   </Form>

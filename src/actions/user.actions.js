@@ -1,7 +1,7 @@
 import userConstants from 'constants/user.constants';
 import alertActions from 'actions/alert.actions';
-import history from 'helpers/history';
 import userService from 'services/user.service';
+import { withRouter } from 'react-router';
 
 const login = (username, password) => {
 
@@ -25,7 +25,6 @@ const login = (username, password) => {
       .then(
         user => {
           dispatch(success(user));
-          history.push('/');
         },
         error => {
           dispatch(failure(error.toString()));
@@ -40,15 +39,14 @@ const logout = () => {
   return { type: userConstants.LOGOUT };
 };
 
-function register(user) {
-  // eslint-disable-next-line no-shadow
-  function request(user) {
-    return { type: userConstants.REGISTER_REQUEST, user };
+const register = (username, password, confirmPassword, email, termsOfUse) => {
+
+  function request() {
+    return { type: userConstants.REGISTER_REQUEST };
   }
 
-  // eslint-disable-next-line no-shadow
-  function success(user) {
-    return { type: userConstants.REGISTER_SUCCESS, user };
+  function success() {
+    return { type: userConstants.REGISTER_SUCCESS };
   }
 
   function failure(error) {
@@ -56,21 +54,20 @@ function register(user) {
   }
 
   return dispatch => {
-    dispatch(request(user));
+    dispatch(request());
 
-    userService.register(user)
+    userService.register(username, password, confirmPassword, email, termsOfUse)
       .then(() => {
           dispatch(success());
-          history.push('/login');
-          dispatch(alertActions.success('Registration successful'));
+          dispatch(alertActions.success(['Rejestracja udana', 'Aby aktywować konto kliknij w link aktywacyjny w przesłanej przez nas wiadomości']));
         },
         error => {
           dispatch(failure(error.toString()));
-          dispatch(alertActions.error(error.toString()));
+          dispatch(alertActions.error(['Rejestracja nieudana', error.toString()]));
         },
       );
   };
-}
+};
 
 function getAll() {
   function request() {
@@ -124,10 +121,10 @@ function _delete(id) {
   };
 }
 
-export default {
+export default withRouter({
   login,
   logout,
   register,
   getAll,
   delete: _delete,
-};
+});

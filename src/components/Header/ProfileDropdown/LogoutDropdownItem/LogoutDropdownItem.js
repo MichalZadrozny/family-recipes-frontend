@@ -17,7 +17,7 @@ const LoginDropdownItem = ({ history, logout }) => (
         history.push('/');
       }}
       bsPrefix={styles.dropdownItem}>
-      Logout
+      Wyloguj
     </Dropdown.Item>
   </>
 );

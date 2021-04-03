@@ -1,9 +1,6 @@
-import authHeader from 'helpers/auth-header';
-
 const config = 'http://localhost:8080';
 
 function logout() {
-  // remove user from local storage to log user out
   localStorage.removeItem('user');
 }
 
@@ -32,73 +29,27 @@ function login(username, password) {
     body: JSON.stringify({ username, password }),
   };
 
-  console.log(requestOptions);
-
   return fetch(`${config}/api/user/login`, requestOptions)
     .then(handleResponse)
     .then(user => {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem('user', JSON.stringify(user));
 
       return user;
     });
 }
 
-function getAll() {
-  const requestOptions = {
-    method: 'GET',
-    headers: authHeader(),
-  };
-
-  return fetch(`${config}/users`, requestOptions).then(handleResponse);
-}
-
-function getById(id) {
-  const requestOptions = {
-    method: 'GET',
-    headers: authHeader(),
-  };
-
-  return fetch(`${config}/users/${id}`, requestOptions).then(handleResponse);
-}
-
-function register(user) {
+function register(username, password, confirmPassword, email, termsOfUse) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(user),
+    body: JSON.stringify({ username, password, confirmPassword, email, termsOfUse }),
   };
 
-  return fetch(`${config}/users/register`, requestOptions).then(handleResponse);
-}
-
-function update(user) {
-  const requestOptions = {
-    method: 'PUT',
-    headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify(user),
-  };
-
-  return fetch(`${config}/users/${user.id}`, requestOptions).then(handleResponse);
-}
-
-// prefixed function name with underscore because delete is a reserved word in javascript
-// eslint-disable-next-line no-underscore-dangle
-function _delete(id) {
-  const requestOptions = {
-    method: 'DELETE',
-    headers: authHeader(),
-  };
-
-  return fetch(`${config}/users/${id}`, requestOptions).then(handleResponse);
+  return fetch(`${config}/api/user/sign-up`, requestOptions).then(handleResponse);
 }
 
 export default {
   login,
   logout,
   register,
-  getAll,
-  getById,
-  update,
-  delete: _delete,
 };

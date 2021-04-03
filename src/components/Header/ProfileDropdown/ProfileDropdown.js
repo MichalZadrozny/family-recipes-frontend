@@ -9,6 +9,7 @@ import { PropTypes } from 'prop-types';
 import styles from './ProfileDropdown.module.scss';
 import LoginDropdownItem from './LoginDropdownItem/LoginDropdownItem';
 import LogoutDropdownItem from './LogoutDropdownItem/LogoutDropdownItem';
+import RegisterDropdownItem from './RegisterDropdownItem/RegisterDropdownItem';
 
 const ProfileDropdown = ({ loggedIn }) => (
   <Dropdown>
@@ -20,11 +21,15 @@ const ProfileDropdown = ({ loggedIn }) => (
         loggedIn ?
           <>
             <Dropdown.Item as={NavLink} to='/user' bsPrefix={styles.dropdownItem}>
-              Profile
+              Profil
             </Dropdown.Item>
             <LogoutDropdownItem />
           </>
-          : <LoginDropdownItem />
+          :
+          <>
+            <LoginDropdownItem />
+            <RegisterDropdownItem />
+          </>
       }
     </Dropdown.Menu>
   </Dropdown>
