@@ -5,7 +5,7 @@ import { Button, Form, Row } from 'react-bootstrap';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
-import userActions from 'actions/user.actions';
+import userActions from 'redux/actions/user.actions';
 import styles from './RegisterForm.module.scss';
 
 const validationSchema = Yup.object().shape({

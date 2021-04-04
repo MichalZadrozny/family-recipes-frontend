@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { PropTypes } from 'prop-types';
 
-import userActions from 'actions/user.actions';
+import userActions from 'redux/actions/user.actions';
 import styles from './LogoutDropdownItem.module.scss';
 
 const LoginDropdownItem = ({ history, logout }) => (

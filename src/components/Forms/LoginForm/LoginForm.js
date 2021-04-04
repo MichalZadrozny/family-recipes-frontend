@@ -8,7 +8,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import userActions from 'actions/user.actions';
+import userActions from 'redux/actions/user.actions';
 import styles from './LoginForm.module.scss';
 
 const validationSchema = Yup.object().shape({

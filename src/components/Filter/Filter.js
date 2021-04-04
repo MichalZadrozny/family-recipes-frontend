@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from 'components/Filter/Filter.module.scss';
-import { clearFilterCheckboxes as clearCheckboxes } from 'actions/filter.actions';
+import { clearFilterCheckboxes as clearCheckboxes } from 'redux/actions/filter.actions';
 import DietCheckbox from './DietCheckbox/DietCheckbox';
 
 const Filter = ({ clearFilterCheckboxes, diet }) => (

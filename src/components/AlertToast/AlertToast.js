@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { Toast } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import alertActions from 'actions/alert.actions';
+import alertActions from 'redux/actions/alert.actions';
 import styles from './AlertToast.module.scss';
 
 const AlertToast = ({ alert, clear }) => {

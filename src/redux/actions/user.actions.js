@@ -1,5 +1,5 @@
 import userConstants from 'constants/user.constants';
-import alertActions from 'actions/alert.actions';
+import alertActions from 'redux/actions/alert.actions';
 import userService from 'services/user.service';
 import { withRouter } from 'react-router';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { handleCheckboxChange as checkboxChange } from 'actions/filter.actions';
+import { handleCheckboxChange as checkboxChange } from 'redux/actions/filter.actions';
 
 const DietCheckbox = ({ diet, handleCheckboxChange, label, dietName }) => (
   <>
