@@ -4,16 +4,16 @@ import styles from 'components/RecipePreviewWrapper/RecipePreview/RecipeRating/R
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-const RecipeRating = ({rating}) => (
+const RecipeRating = ({ averageRating }) => (
   <div className={styles.rating}>
-    <FontAwesomeIcon icon={faStar} className={styles.ratingIcon}/>
-    <span>{rating}</span>
+    <FontAwesomeIcon icon={faStar} className={styles.ratingIcon} />
+    <span>{averageRating}</span>
   </div>
 );
 
 
 RecipeRating.propTypes = {
-  rating: PropTypes.number.isRequired,
+  averageRating: PropTypes.number.isRequired,
 }
 
 export default RecipeRating;

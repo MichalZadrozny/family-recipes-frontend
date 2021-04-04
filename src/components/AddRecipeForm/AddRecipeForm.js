@@ -36,7 +36,7 @@ const validationSchema = Yup.object().shape({
       },
     ),
   ).min(1, '*Przepus musi mieć co najmniej jeden krok'),
-  time: Yup.number()
+  preparationTime: Yup.number()
     .typeError('*Czas musi być podany za pomocą liczby')
     .positive('*Czas musi być większy od 0')
     .required('*Czas jest wymagany'),
@@ -224,13 +224,13 @@ const form = (props) => (
       <Form.Control
         type='number'
         placeholder='Czas przygotowania'
-        name='time'
+        name='preparationTime'
         onChange={props.handleChange}
         onBlur={props.handleBlur}
-        value={props.values.time}
-        className={props.touched.time && props.errors.time ? styles.error : null} />
-      {props.touched.time && props.errors.time ? (
-        <div className={styles.errorMessage}>{props.errors.time}</div>
+        value={props.values.preparationTime}
+        className={props.touched.preparationTime && props.errors.preparationTime ? styles.error : null} />
+      {props.touched.preparationTime && props.errors.preparationTime ? (
+        <div className={styles.errorMessage}>{props.errors.preparationTime}</div>
       ) : null}
     </Form.Group>
     <Form.Group controlId='diet'>
@@ -301,7 +301,7 @@ const initialValues = {
       step: '',
     },
   ],
-  time: '',
+  preparationTime: '',
 };
 
 const AddRecipeForm = ({ addRecipe, history }) => (
@@ -325,7 +325,6 @@ const AddRecipeForm = ({ addRecipe, history }) => (
     }}
   />
 );
-
 
 export default withRouter(AddRecipeForm);
 

@@ -1,4 +1,4 @@
-const config = 'http://localhost:8080';
+import appConstants from 'constants/app.constants';
 
 function logout() {
   localStorage.removeItem('user');
@@ -29,7 +29,7 @@ function login(username, password) {
     body: JSON.stringify({ username, password }),
   };
 
-  return fetch(`${config}/api/user/login`, requestOptions)
+  return fetch(`${appConstants.BACKEND_URL}/api/user/login`, requestOptions)
     .then(handleResponse)
     .then(user => {
       localStorage.setItem('user', JSON.stringify(user));
@@ -45,7 +45,7 @@ function register(username, password, confirmPassword, email, termsOfUse) {
     body: JSON.stringify({ username, password, confirmPassword, email, termsOfUse }),
   };
 
-  return fetch(`${config}/api/user/sign-up`, requestOptions).then(handleResponse);
+  return fetch(`${appConstants.BACKEND_URL}/api/user/sign-up`, requestOptions).then(handleResponse);
 }
 
 export default {

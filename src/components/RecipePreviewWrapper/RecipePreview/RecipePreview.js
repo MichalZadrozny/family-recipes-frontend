@@ -7,7 +7,7 @@ import { faDrumstickBite, faEgg, faLeaf } from '@fortawesome/free-solid-svg-icon
 import imageNotFound from 'assets/img/image-not-found.png';
 import RecipeRating from './RecipeRating/RecipeRating';
 
-const RecipePreview = ({ image, name, diet, time }) => (
+const RecipePreview = ({ image, name, diet, preparationTime, averageRating }) => (
   <Col className={styles.recipePreview}>
     <div className={styles.imageBox}>
       <img src={image} alt={name} className={styles.image} />
@@ -20,10 +20,10 @@ const RecipePreview = ({ image, name, diet, time }) => (
           {diet === 'VEGAN' && <DietIcon icon={faLeaf} tooltip='Wegańska' />}
         </Col>
         <Col className={styles.detailsColumn} xs={5}>
-          <p>{time} min</p>
+          <p>{preparationTime} min</p>
         </Col>
         <Col className={styles.detailsColumn} xs={4}>
-          <RecipeRating rating={4.5} />
+          <RecipeRating averageRating={averageRating} />
         </Col>
       </div>
       <p className={styles.recipeName}>{name}</p>
@@ -36,7 +36,8 @@ RecipePreview.propTypes = {
   image: PropTypes.string,
   name: PropTypes.string.isRequired,
   diet: PropTypes.string.isRequired,
-  time: PropTypes.number.isRequired,
+  preparationTime: PropTypes.number.isRequired,
+  averageRating: PropTypes.number.isRequired,
 };
 
 RecipePreview.defaultProps = {

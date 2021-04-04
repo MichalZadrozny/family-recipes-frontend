@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { addRecipe as addRecipeAction } from 'redux/actions/recipe.actions';
 import { PropTypes } from 'prop-types';
 
+import recipeActions from 'redux/actions/recipe.actions';
+import AddRecipeForm from 'components/AddRecipeForm/AddRecipeForm';
 import styles from './AddRecipeView.module.scss';
-import AddRecipeForm from '../../components/AddRecipeForm/AddRecipeForm';
 
 const AddRecipeView = ({ addRecipe }) => (
   <>
@@ -16,7 +16,7 @@ const AddRecipeView = ({ addRecipe }) => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  addRecipe: itemContent => dispatch(addRecipeAction(itemContent)),
+  addRecipe: itemContent => dispatch(recipeActions.addRecipe(itemContent)),
 });
 
 export default connect(null, mapDispatchToProps)(AddRecipeView);

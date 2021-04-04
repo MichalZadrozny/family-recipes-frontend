@@ -34,7 +34,8 @@ MainView.propTypes = {
       image: PropTypes.string,
       name: PropTypes.string,
       diet: PropTypes.string,
-      time: PropTypes.number,
+      preparationTime: PropTypes.number,
+      averageRating: PropTypes.number,
     }),
   ).isRequired,
 };
