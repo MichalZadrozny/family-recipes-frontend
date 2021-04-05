@@ -6,6 +6,7 @@ import MainTemplate from 'templates/MainTemplate';
 import AddRecipeView from 'views/AddRecipeView/AddRecipeView';
 import UserProfileView from 'views/UserProfileView/UserProfileView';
 import LoginView from 'views/LoginView/LoginView';
+import RecipeView from 'views/RecipeView/RecipeView';
 
 const Root = () => (
   <BrowserRouter>
@@ -15,6 +16,7 @@ const Root = () => (
         <Route path='/add-recipe' component={AddRecipeView} />
         <Route path='/user' component={UserProfileView} />
         <Route path='/login' component={LoginView} />
+        <Route path='/recipe/:id' component={RecipeView} />
         <Redirect to='/' />
       </Switch>
     </MainTemplate>
