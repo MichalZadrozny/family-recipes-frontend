@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import MainWrapper from 'views/MainView/MainView';
 import MainTemplate from 'templates/MainTemplate';
@@ -12,9 +12,10 @@ const Root = () => (
     <MainTemplate>
       <Switch>
         <Route exact path='/' component={MainWrapper} />
-        <Route exact path='/add-recipe' component={AddRecipeView} />
-        <Route exact path='/user' component={UserProfileView} />
-        <Route exact path='/login' component={LoginView} />
+        <Route path='/add-recipe' component={AddRecipeView} />
+        <Route path='/user' component={UserProfileView} />
+        <Route path='/login' component={LoginView} />
+        <Redirect to='/' />
       </Switch>
     </MainTemplate>
   </BrowserRouter>
