@@ -1,3 +1,3 @@
 export default {
-  BACKEND_URL: 'http://localhost:8080',
+  BACKEND_URL: 'https://family-recipes-dev.herokuapp.com',
 };
