@@ -1,17 +1,35 @@
 import recipeConstants from 'constants/recipe.constants';
 import recipeService from 'services/recipe.service';
 
-// eslint-disable-next-line import/prefer-default-export
-const addRecipe = (itemContent) => ({
-  type: recipeConstants.ADD_RECIPE,
-  payload: {
-    itemContent,
-  },
-});
+const addRecipe = (recipe) => {
+
+  // eslint-disable-next-line no-shadow
+  function request(recipe) {
+    return { type: recipeConstants.ADD_RECIPE_REQUEST, recipe };
+  }
+
+  // eslint-disable-next-line no-shadow
+  function success(recipe) {
+    return { type: recipeConstants.ADD_RECIPE_SUCCESS, recipe };
+  }
+
+  function failure(error) {
+    return { type: recipeConstants.ADD_RECIPE_FAILURE, error };
+  }
+
+  return dispatch => {
+
+    dispatch(request());
+    recipeService.addRecipe(recipe)
+      .then((response) => {
+        dispatch(success(response));
+        dispatch(failure(response.toString()));
+      });
+  };
+};
 
 
 const getRecipePreviews = () => {
-
 
   function request() {
     return { type: recipeConstants.GET_PREVIEWS_REQUEST };

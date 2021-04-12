@@ -3,18 +3,29 @@ import recipeConstants from 'constants/recipe.constants';
 
 const initialState = {
   items: [],
+  selectedRecipe: null,
   loading: false,
+  adding: false,
 };
 
 const recipe = (state = initialState, action) => {
   switch (action.type) {
-    case(recipeConstants.ADD_RECIPE):
+    case (recipeConstants.ADD_RECIPE_REQUEST):
       return {
         ...state,
-        items: [
-          ...state.items,
-          action.payload.itemContent,
-        ],
+        adding: true,
+      };
+    case (recipeConstants.ADD_RECIPE_SUCCESS):
+      return {
+        ...state,
+        selectedRecipe: action.recipe,
+        adding: false,
+      };
+    case(recipeConstants.ADD_RECIPE_FAILURE):
+      return {
+        ...state,
+        error: action.error,
+        adding: false,
       };
     case(recipeConstants.GET_PREVIEWS_REQUEST):
       return {

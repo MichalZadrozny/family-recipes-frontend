@@ -10,10 +10,10 @@ import { withRouter } from 'react-router';
 import imageNotFound from 'assets/img/image-not-found.png';
 import RecipeRating from './RecipeRating/RecipeRating';
 
-const RecipePreview = ({ image, name, diet, preparationTime, averageRating, history, id }) => (
+const RecipePreview = ({ imageName, name, diet, preparationTime, averageRating, history, id }) => (
   <Col className={styles.recipePreview} onClick={() => history.push(`/recipe/${id}`)}>
     <div className={styles.imageBox}>
-      <img src={image} alt={name} className={styles.image} />
+      <img src={imageName} alt={name} className={styles.image} />
     </div>
 
     <div className={styles.info}>
@@ -39,7 +39,7 @@ const RecipePreview = ({ image, name, diet, preparationTime, averageRating, hist
 
 
 RecipePreview.propTypes = {
-  image: PropTypes.string,
+  imageName: PropTypes.string,
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   diet: PropTypes.string.isRequired,
@@ -49,7 +49,7 @@ RecipePreview.propTypes = {
 };
 
 RecipePreview.defaultProps = {
-  image: imageNotFound,
+  imageName: imageNotFound,
 };
 
 export default withRouter(RecipePreview);
