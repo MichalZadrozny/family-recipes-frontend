@@ -3,7 +3,7 @@ import recipeConstants from 'constants/recipe.constants';
 
 const initialState = {
   items: [],
-  selectedRecipe: null,
+  selectedRecipe: undefined,
   loading: false,
   adding: false,
 };
@@ -13,6 +13,7 @@ const recipe = (state = initialState, action) => {
     case (recipeConstants.ADD_RECIPE_REQUEST):
       return {
         ...state,
+        selectedRecipe: undefined,
         adding: true,
       };
     case (recipeConstants.ADD_RECIPE_SUCCESS):
@@ -24,6 +25,7 @@ const recipe = (state = initialState, action) => {
     case(recipeConstants.ADD_RECIPE_FAILURE):
       return {
         ...state,
+        selectedRecipe: undefined,
         error: action.error,
         adding: false,
       };
