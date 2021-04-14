@@ -12,7 +12,7 @@ const Header = () => (
     </NavLink>
     <div className={styles.headerNav}>
       <NavLink to='/add-recipe'>
-        Add Recipe
+        Dodaj przepis
       </NavLink>
       <ProfileDropdown />
     </div>
