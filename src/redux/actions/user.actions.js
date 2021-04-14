@@ -22,13 +22,11 @@ const login = (username, password) => {
     dispatch(request({ username }));
 
     userService.login(username, password)
-      .then(
-        user => {
-          dispatch(success(user));
-        },
+      .then(user => dispatch(success(user)))
+      .catch(
         error => {
           dispatch(failure(error.toString()));
-          dispatch(alertActions.error(error.toString()));
+          dispatch(alertActions.error(['Logowanie nieudane', 'Użytkownik nie został znaleziony']));
         },
       );
   };
@@ -58,14 +56,13 @@ const register = (username, password, confirmPassword, email, termsOfUse) => {
 
     userService.register(username, password, confirmPassword, email, termsOfUse)
       .then(() => {
-          dispatch(success());
-          dispatch(alertActions.success(['Rejestracja udana', 'Aby aktywować konto kliknij w link aktywacyjny w przesłanej przez nas wiadomości']));
-        },
-        error => {
-          dispatch(failure(error.toString()));
-          dispatch(alertActions.error(['Rejestracja nieudana', error.toString()]));
-        },
-      );
+        dispatch(success());
+        dispatch(alertActions.success(['Rejestracja udana', 'Aby aktywować konto kliknij w link aktywacyjny w przesłanej przez nas wiadomości']));
+      }).catch(
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(['Rejestracja nieudana', error.toString()]));
+      });
   };
 };
 
