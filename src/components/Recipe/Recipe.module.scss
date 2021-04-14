@@ -1,0 +1,55 @@
+.recipeContainer {
+  text-align: center;
+}
+
+.details {
+  display: flex;
+  justify-content: space-around;
+}
+
+.image {
+  width: 50rem;
+  height: 35rem;
+}
+
+.imageBox {
+
+}
+
+.info {
+  background-color: lightgrey;
+  padding: 2rem 1rem 1rem;
+  margin: 3rem 0;
+}
+
+.nutrients {
+  display: flex;
+  justify-content: space-evenly;
+
+  &Name {
+    font-weight: bold;
+  }
+}
+
+.lists {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.ingredient {
+  display: flex;
+  font-size: 0.85em;
+
+  &Name {
+    margin-right: 1rem;
+  }
+
+  &Unit {
+    margin-right: 1rem;
+  }
+}
+
+h1 {
+  font-size: 2.8em;
+}

@@ -3,20 +3,19 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
-const DietIcon = ({ icon, tooltip }) => (
+const Icon = ({ icon, tooltip }) => (
   <OverlayTrigger overlay={<Tooltip id='tooltip'>{tooltip}</Tooltip>}>
     <FontAwesomeIcon icon={icon} />
   </OverlayTrigger>
 );
 
-DietIcon.propTypes = {
+Icon.propTypes = {
   icon: PropTypes.shape({
     prefix: PropTypes.string,
     iconName: PropTypes.string,
-    // eslint-disable-next-line react/forbid-prop-types
-    icon: PropTypes.array,
+    icon: PropTypes.arrayOf(PropTypes.any),
   }).isRequired,
   tooltip: PropTypes.string.isRequired,
 };
 
-export default DietIcon;
+export default Icon;

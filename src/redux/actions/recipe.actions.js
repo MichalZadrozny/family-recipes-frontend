@@ -21,10 +21,9 @@ const addRecipe = (recipe) => {
 
     dispatch(request());
     recipeService.addRecipe(recipe)
-      .then((response) => {
-        dispatch(success(response));
-        dispatch(failure(response.toString()));
-      });
+      .then(response => dispatch(success(response)))
+      .catch(response => dispatch(failure(response.toString())),
+      );
   };
 };
 
@@ -52,10 +51,34 @@ const getRecipePreviews = () => {
         error => dispatch(failure(error.toString())),
       );
   };
+};
 
+const getSingleRecipe = (id) => {
+
+  function request() {
+    return { type: recipeConstants.GET_RECIPE_REQUEST };
+  }
+
+  function success(recipe) {
+    return { type: recipeConstants.GET_RECIPE_SUCCESS, recipe };
+  }
+
+  function failure(error) {
+    return { type: recipeConstants.GET_RECIPE_FAILURE, error };
+  }
+
+  return dispatch => {
+
+    dispatch(request());
+    recipeService.getSingleRecipe(id)
+      .then(recipe => dispatch(success(recipe)))
+      .catch(() => dispatch(failure('Recipe not found')),
+      );
+  };
 };
 
 export default {
   addRecipe,
   getRecipePreviews,
+  getSingleRecipe,
 };

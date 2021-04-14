@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from 'components/RecipePreviewWrapper/RecipePreview/RecipePreview.module.scss';
 import Col from 'react-bootstrap/Col';
-import DietIcon from 'components/RecipePreviewWrapper/RecipePreview/DietIcon/DietIcon';
-import { faDrumstickBite, faEgg, faLeaf } from '@fortawesome/free-solid-svg-icons';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { withRouter } from 'react-router';
 
 import imageNotFound from 'assets/img/image-not-found.png';
+import DietIcon from 'components/Icon/DietIcon/DietIcon';
 import RecipeRating from './RecipeRating/RecipeRating';
 
 const RecipePreview = ({ imageName, name, diet, preparationTime, averageRating, history, id }) => (
@@ -19,9 +18,7 @@ const RecipePreview = ({ imageName, name, diet, preparationTime, averageRating, 
     <div className={styles.info}>
       <div className={styles.details}>
         <Col className={[styles.diet, styles.detailsColumn].join(' ')} xs={3}>
-          {diet === 'MEAT' && <DietIcon icon={faDrumstickBite} tooltip='Mięsna' />}
-          {diet === 'VEGETARIAN' && <DietIcon icon={faEgg} tooltip='Wegetariańska' />}
-          {diet === 'VEGAN' && <DietIcon icon={faLeaf} tooltip='Wegańska' />}
+          <DietIcon diet={diet} />
         </Col>
 
         <Col className={styles.detailsColumn} xs={5}>

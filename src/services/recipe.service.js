@@ -23,6 +23,15 @@ function getRecipePreviews() {
   return fetch(`${appConstants.BACKEND_URL}/api/recipes`, requestOptions).then(handleResponse);
 }
 
+function getSingleRecipe(id) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  return fetch(`${appConstants.BACKEND_URL}/api/recipes/${id}`, requestOptions).then(handleResponse);
+}
+
 function addRecipe(recipe) {
 
   const tempRecipe = recipe;
@@ -52,4 +61,5 @@ function addRecipe(recipe) {
 export default {
   getRecipePreviews,
   addRecipe,
+  getSingleRecipe,
 };

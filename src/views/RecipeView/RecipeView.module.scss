@@ -1,0 +1,21 @@
+.recipeContainer {
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  height: auto;
+}
+
+@media (min-width: 992px) {
+  .recipeContainer {
+    max-width: 1000px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .recipeContainer {
+    max-width: 1500px;
+  }
+}

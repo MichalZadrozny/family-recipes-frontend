@@ -46,6 +46,23 @@ const recipe = (state = initialState, action) => {
         error: action.error,
         loading: false,
       };
+    case (recipeConstants.GET_RECIPE_REQUEST):
+      return {
+        ...state,
+        selectedRecipe: undefined,
+        error: undefined,
+      };
+    case (recipeConstants.GET_RECIPE_SUCCESS):
+      return {
+        ...state,
+        selectedRecipe: action.recipe,
+      };
+    case(recipeConstants.GET_RECIPE_FAILURE):
+      return {
+        ...state,
+        selectedRecipe: undefined,
+        error: action.error,
+      };
     default:
       return state;
   }
