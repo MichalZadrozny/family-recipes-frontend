@@ -12,6 +12,7 @@ import RecipeRating from './RecipeRating/RecipeRating';
 const RecipePreview = ({ imageName, name, diet, preparationTime, averageRating, history, id }) => (
   <Col className={styles.recipePreview} onClick={() => history.push(`/recipe/${id}`)}>
     <div className={styles.imageBox}>
+      <div className={styles.shadow} />
       <img src={imageName} alt={name} className={styles.image} />
     </div>
 
