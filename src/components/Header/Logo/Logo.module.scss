@@ -1,7 +1,13 @@
 .logo {
-  font-size: 2.6rem;
+  height: 9rem;
+  width: 14.5rem;
+  vertical-align: 1px;
 }
 
-.logoName {
-  padding-left: 1.3rem;
+@media(max-width: 450px) {
+  .logo {
+    height: 7.5rem;
+    width: 11rem;
+    vertical-align: 7px;
+  }
 }
