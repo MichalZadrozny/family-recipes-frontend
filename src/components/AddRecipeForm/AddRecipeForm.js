@@ -24,7 +24,7 @@ const FILE_SIZE = 2 * 1024 * 1024; // 2MB
 const validationSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, '*Nazwa musi się składać co najmniej z dwóch znaków')
-    .max(60, '*Nazwa nie może składać się z więcej niż 60 znaków')
+    .max(54, '*Nazwa nie może składać się z więcej niż 54 znaków')
     .required('*Przepis musi posiadać nazwę'),
   description: Yup.string(),
   ingredients: Yup.array().of(
