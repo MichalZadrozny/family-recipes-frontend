@@ -1,12 +1,13 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+
 import { handleCheckboxChange as checkboxChange } from 'redux/actions/filter.actions';
 
 const DietCheckbox = ({ diet, handleCheckboxChange, label, dietName }) => (
   <>
     <label htmlFor={dietName}>
-      {label}
+      {`${label}: `}
       <input type='checkbox' id={dietName} checked={diet} onChange={handleCheckboxChange} />
     </label>
   </>
