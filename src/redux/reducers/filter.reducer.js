@@ -7,6 +7,7 @@ const initialState = {
     vegetarian: false,
     vegan: false,
   },
+  filterIsVisible: true,
 };
 
 const filter = (state = initialState, action) => {
@@ -27,6 +28,11 @@ const filter = (state = initialState, action) => {
           vegetarian: false,
           meat: false,
         },
+      };
+    case(filterConstants.TOGGLE_FILTER):
+      return {
+        ...state,
+        filterIsVisible: !state.filterIsVisible,
       };
     default:
       return state;

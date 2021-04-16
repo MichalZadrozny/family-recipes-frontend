@@ -1,21 +1,64 @@
 .filter {
-	background-color: #488b8f;
-	color: #e8f1ef;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	height: 100vh;
-	width: 30rem;
-	font-size: 1.5rem;
-	padding: 3rem;
-	position: fixed;
+  background-color: #488b8f;
+  background-image: linear-gradient(90deg, #37ad9b, #80afaf);
+  box-shadow: 0 0 8px rgba(0, 0, 0, .5);
+  color: #e8f1ef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 25rem;
+  font-size: 1.5rem;
+  padding: 3.5rem;
+  position: fixed;
 
-	div {
-		width: 100%;
-		padding-bottom: 2rem;
-	}
 
-	h2 {
-		margin-bottom: 1.3rem;
-	}
+  div {
+    width: 100%;
+    padding-bottom: 2rem;
+  }
+
+  h2 {
+    margin-bottom: 1.3rem;
+  }
+
+  &List {
+    margin-top: 2.3rem;
+    position: relative;
+  }
+
+  &Visible {
+    transform: translate(0, 0);
+    transition: transform 0.8s;
+  }
+
+  &Hidden {
+    transform: translate(-25rem, 0);
+    transition: transform 0.8s;
+  }
+
+  &Wrapper {
+    position: relative;
+  }
+}
+
+.hideButton {
+  position: absolute;
+  top: -2.5rem;
+  right: -1.5rem;
+}
+
+.showButton {
+  position: absolute;
+  top: 3rem;
+  left: 1.4rem;
+  z-index: 5;
+
+  opacity: 1;
+  transition: opacity 0.4s ease 0.8s;
+
+  &Hidden {
+    transition: opacity 0.2s ease 0s;
+    opacity: 0;
+  }
 }

@@ -7,9 +7,18 @@ export const handleCheckboxChange = (event) => ({
   },
 });
 
-export const clearFilterCheckboxes = (event) => ({
+const clearFilterCheckboxes = (event) => ({
   type: filterConstants.CLEAR_FILTER_CHECKBOXES,
   payload: {
     event,
   },
 });
+
+const toggleFilter = () => ({
+  type: filterConstants.TOGGLE_FILTER,
+});
+
+export default {
+  clearFilterCheckboxes,
+  toggleFilter,
+};

@@ -17,10 +17,10 @@ class RecipePreviewWrapper extends Component {
   }
 
   render() {
-    const { items, diet } = this.props;
+    const { items, diet, filterIsVisible } = this.props;
 
     return (
-      <div className={styles.mainWrapper}>
+      <div className={[styles.mainWrapper, !filterIsVisible ? styles.filterHidden : styles.filterVisible].join(' ')}>
 
         <AlertToast />
         <Row className={styles.recipePreviewWrapper}>
@@ -56,7 +56,9 @@ class RecipePreviewWrapper extends Component {
   }
 }
 
-const mapStateToProps = ({ alert }) => ({ alert });
+const mapStateToProps = ({ filter }) => ({
+  filterIsVisible: filter.filterIsVisible,
+});
 
 const mapDispatchToProps = dispatch => ({
   getRecipePreviews: () => dispatch(recipeActions.getRecipePreviews()),
@@ -77,4 +79,5 @@ RecipePreviewWrapper.propTypes = {
   ).isRequired,
   diet: PropTypes.objectOf(bool).isRequired,
   getRecipePreviews: PropTypes.func.isRequired,
+  filterIsVisible: PropTypes.bool.isRequired,
 };
