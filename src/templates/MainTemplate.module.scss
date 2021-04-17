@@ -8,5 +8,12 @@
   display: flex;
   height: auto;
   margin-top: 9.2rem;
+  transition: all 0.5s;
+}
 
+@media (max-width: 450px) {
+  .main {
+    margin-top: 7rem;
+    transition: all 0.5s;
+  }
 }

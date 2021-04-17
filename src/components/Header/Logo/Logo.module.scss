@@ -1,13 +1,13 @@
 .logo {
   height: 9rem;
   width: 14.5rem;
-  vertical-align: 1px;
+  transition: all 0.5s;
 }
 
 @media(max-width: 450px) {
   .logo {
-    height: 7.5rem;
-    width: 11rem;
-    vertical-align: 7px;
+    height: 6.5rem;
+    width: 10rem;
+    transition: all 0.5s;
   }
 }

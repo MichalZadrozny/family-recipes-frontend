@@ -2,12 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2.7rem 5rem 2.7rem 2.3rem;
+  padding: 2.7rem 5rem 2.7rem 2.7rem;
   background-image: linear-gradient(180deg, #5ea3a3, #548b8b);
   position: fixed;
   height: 11rem;
   width: 100%;
   z-index: 5;
+  transition: all 0.5s;
 
   a {
     text-decoration: none;
@@ -21,13 +22,22 @@
   justify-content: space-between;
   align-items: center;
   text-align: center;
+  transition: all 0.5s;
+
+  a {
+    position: relative;
+    top: 2px;
+  }
 }
 
 @media (max-width: 450px) {
   .headerNav {
     width: 6.5em;
+    transition: all 0.5s;
   }
   .header {
-    padding: 1.5rem 3rem;
+    padding: 1.5rem 3rem 1.5rem 2.6rem;
+    height: 8rem;
+    transition: all 0.5s;
   }
 }
