@@ -11,7 +11,7 @@
   font-size: 1.5rem;
   padding: 3.5rem;
   position: fixed;
-
+  z-index: 2;
 
   div {
     width: 100%;
@@ -59,6 +59,7 @@
 
   &Hidden {
     transition: opacity 0.2s ease 0s;
+    visibility: hidden;
     opacity: 0;
   }
 }
