@@ -7,13 +7,13 @@
 .main {
   display: flex;
   height: auto;
-  margin-top: 9.2rem;
+  margin-top: 11rem;
   transition: all 0.5s;
 }
 
 @media (max-width: 450px) {
   .main {
-    margin-top: 7rem;
+    margin-top: 8rem;
     transition: all 0.5s;
   }
 }
