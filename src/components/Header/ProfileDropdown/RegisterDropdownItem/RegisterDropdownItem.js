@@ -5,7 +5,7 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 
 import FormModal from 'components/Forms/FormModal/FormModal';
 import RegisterForm from 'components/Forms/RegisterForm/RegisterForm';
-import styles from './RegisterDropdownItem.module.scss';
+import styles from '../ProfileDropdown.module.scss';
 
 const RegisterDropdownItem = ({ history }) => {
   const [modalShow, setModalShow] = React.useState(false);

@@ -18,8 +18,13 @@
   white-space: nowrap;
   background-color: transparent;
   border: 0;
+  font-size: 1.1rem;
 }
 
 .dropdownItem:hover {
   background-color: #e9ecef;
+}
+
+a:last-child {
+  margin-bottom: 0.35rem;
 }

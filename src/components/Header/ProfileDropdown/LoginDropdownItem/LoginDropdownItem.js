@@ -5,7 +5,7 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 
 import FormModal from 'components/Forms/FormModal/FormModal';
 import LoginForm from 'components/Forms/LoginForm/LoginForm';
-import styles from './LoginDropdownItem.module.scss';
+import styles from '../ProfileDropdown.module.scss';
 
 const LoginDropdownItem = ({ history }) => {
   const [modalShow, setModalShow] = React.useState(false);
