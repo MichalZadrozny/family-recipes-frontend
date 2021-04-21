@@ -203,7 +203,7 @@ class AddRecipeForm extends Component {
                           const errorsIng = errors.ingredients;
 
                           return (
-                            <div key={item.id}>
+                            <div key={item.id} className={styles.arrayInput}>
                               <InputGroup>
                                 <InputGroup.Prepend>
                                   <InputGroup.Text>
@@ -235,19 +235,18 @@ class AddRecipeForm extends Component {
                                   className={(touchedIng && touchedIng[index] && touchedIng[index].name) && (errorsIng && errorsIng[index] && errorsIng[index].name) ? styles.error : null}
                                 /><br />
 
-                                <button type='button'
+                                <button type='button' className={styles.removeButton}
                                         onClick={() => ingredientsArray.remove(index)}> -
                                 </button>
-
-                                {(touchedIng && touchedIng[index] && touchedIng[index].amount) && (errorsIng && errorsIng[index] && errorsIng[index].amount) ? (
-                                  <div className={styles.errorMessage}>{errorsIng[index].amount}</div>
-                                ) : null}
-
-                                {(touchedIng && touchedIng[index] && touchedIng[index].name) && (errorsIng && errorsIng[index] && errorsIng[index].name) ? (
-                                  <div className={styles.errorMessage}>{errorsIng[index].name}</div>
-                                ) : null}
-
                               </InputGroup>
+
+                              {(touchedIng && touchedIng[index] && touchedIng[index].amount) && (errorsIng && errorsIng[index] && errorsIng[index].amount) ? (
+                                <div className={styles.errorMessage}>{errorsIng[index].amount}</div>
+                              ) : null}
+
+                              {(touchedIng && touchedIng[index] && touchedIng[index].name) && (errorsIng && errorsIng[index] && errorsIng[index].name) ? (
+                                <div className={styles.errorMessage}>{errorsIng[index].name}</div>
+                              ) : null}
 
                             </div>
 
@@ -284,7 +283,7 @@ class AddRecipeForm extends Component {
                         const errorsSteps = errors.steps;
 
                         return (
-                          <div key={item.id}>
+                          <div key={item.id} className={styles.arrayInput}>
                             <InputGroup>
                               <InputGroup.Prepend>
                                 <InputGroup.Text>
@@ -299,17 +298,16 @@ class AddRecipeForm extends Component {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 className={(touchedSteps && touchedSteps[index] && touchedSteps[index].step) && (errorsSteps && errorsSteps[index] && errorsSteps[index].step) ? styles.error : null}
-                              /><br />
+                              />
 
-                              <button type='button'
+                              <button type='button' className={styles.removeButton}
                                       onClick={() => stepsArray.remove(index)}> -
                               </button>
-
-                              {(touchedSteps && touchedSteps[index] && touchedSteps[index].step) && (errorsSteps && errorsSteps[index] && errorsSteps[index].step) ? (
-                                <div className={styles.errorMessage}>{errorsSteps[index].step}</div>
-                              ) : null}
-
                             </InputGroup>
+
+                            {(touchedSteps && touchedSteps[index] && touchedSteps[index].step) && (errorsSteps && errorsSteps[index] && errorsSteps[index].step) ? (
+                              <div className={styles.errorMessage}>{errorsSteps[index].step}</div>
+                            ) : null}
                           </div>
                         );
                       })}
@@ -362,32 +360,39 @@ class AddRecipeForm extends Component {
               </Form.Control>
             </Form.Group>
 
-            <NutrientsFormPart
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-            />
+            <Form.Group>
+              <NutrientsFormPart
+                values={values}
+                errors={errors}
+                touched={touched}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+              />
+            </Form.Group>
 
-            <input
-              id='image'
-              name='image'
-              type='file'
-              accept='image/png, image/jpg, image/jpeg'
-              onBlur={handleBlur}
-              onChange={event => {
-                setFieldValue('image', event.target.files[0]);
-              }}
-            />
 
-            {values.image && errors.image ? (
-              <div className={styles.errorMessage}>{errors.image}</div>
-            ) : null}
+            <Form.Group>
+              <Form.Label>Zdjęcie</Form.Label>
+              <br />
+              <input
+                id='image'
+                name='image'
+                type='file'
+                accept='image/png, image/jpg, image/jpeg'
+                onBlur={handleBlur}
+                onChange={event => {
+                  setFieldValue('image', event.target.files[0]);
+                }}
+              />
+
+              {values.image && errors.image ? (
+                <div className={styles.errorMessage}>{errors.image}</div>
+              ) : null}
+            </Form.Group>
 
             <Row className={styles.submit}>
-              <Button variant='primary' type='submit' disabled={isSubmitting}>
-                Submit
+              <Button variant='secondary' type='submit' disabled={isSubmitting} className={styles.submitButton}>
+                Wyślij
               </Button>
             </Row>
           </Form>

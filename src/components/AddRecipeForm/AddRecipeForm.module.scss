@@ -2,6 +2,18 @@
   display: flex;
   justify-content: center;
   padding: 5rem;
+
+  &Button {
+    font-size: 1.3rem;
+    padding: 0.5rem 0.8rem;
+    background-color: #1575ac;
+    border-color: #1575ac;
+  }
+
+  &Button:hover {
+    background-color: #136a9a;
+    border-color: #136a9a;
+  }
 }
 
 .step {
@@ -19,4 +31,23 @@
   padding: 0.5em 0.2em .8em .2em;
   height: 1em;
   font-size: .8em;
+  margin-bottom: 0.5rem;
+}
+
+span {
+  height: 2.45rem;
+}
+
+.removeButton {
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.arrayInput {
+  padding-bottom: 1rem;
+}
+
+.imageInput {
+  margin-top: 3rem;
 }
