@@ -5,6 +5,8 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import { bool, PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from 'components/Filter/Filter.module.scss';
@@ -13,13 +15,13 @@ import DietCheckbox from './DietCheckbox/DietCheckbox';
 
 const Filter = ({ clearFilterCheckboxes, diet, toggleFilter, filterIsVisible }) => (
   <div className={styles.filterWrapper}>
-    <button type='button' className={[styles.showButton, filterIsVisible ? styles.showButtonHidden : ''].join(' ')}
-            onClick={toggleFilter}>O
-    </button>
+    <FontAwesomeIcon icon={faArrowRight} onClick={toggleFilter}
+                     className={[styles.showButton, filterIsVisible ? styles.showButtonHidden : ''].join(' ')} />
 
     <form className={[styles.filter, filterIsVisible ? styles.filterVisible : styles.filterHidden].join(' ')}>
       <Container className={styles.filterList}>
-        <button type='button' className={styles.hideButton} onClick={toggleFilter}>X</button>
+
+        <FontAwesomeIcon icon={faArrowLeft} onClick={toggleFilter} className={styles.hideButton} />
 
         <h2>Dieta</h2>
         <DietCheckbox diet={diet.meat} dietName='meat' label='Mięsna' />
