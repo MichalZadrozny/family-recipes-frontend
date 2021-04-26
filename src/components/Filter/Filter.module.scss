@@ -44,13 +44,13 @@
 
 .hideButton {
   position: absolute;
-  top: -2.5rem;
+  top: -4rem;
   right: -1.5rem;
 }
 
 .showButton {
-  position: absolute;
-  top: 3rem;
+  position: fixed;
+  top: 12.5rem;
   left: 1.4rem;
   z-index: 5;
 
