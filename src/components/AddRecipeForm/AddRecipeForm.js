@@ -294,7 +294,7 @@ class AddRecipeForm extends Component {
                               <Form.Control
                                 name={`steps.${index}.step`}
                                 type='text'
-                                placeholder={`${index + 1} składnik`}
+                                placeholder={`${index + 1} krok`}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 className={(touchedSteps && touchedSteps[index] && touchedSteps[index].step) && (errorsSteps && errorsSteps[index] && errorsSteps[index].step) ? styles.error : null}
