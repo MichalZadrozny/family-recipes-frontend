@@ -33,7 +33,7 @@
   }
 
   &Hidden {
-    transform: translate(-25rem, 0);
+    transform: translate(-27rem, 0);
     transition: transform 0.8s;
   }
 
@@ -63,5 +63,11 @@
     transition: opacity 0.2s ease 0s;
     visibility: hidden;
     opacity: 0;
+  }
+}
+
+@media (max-width: 450px) {
+  .showButton {
+    top: 9.5rem;
   }
 }
