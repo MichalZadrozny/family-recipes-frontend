@@ -8,42 +8,45 @@ import recipeActions from 'redux/actions/recipe.actions';
 import styles from './Rating.module.scss';
 
 
-const Rating = ({ averageRating, addRating, recipeId }) => {
+const Rating = ({ averageRating, numberOfRatings, addRating, recipeId }) => {
 
   const rest = averageRating % 1;
   const number = averageRating - rest;
 
   return (
-    <div className={styles.rating}>
-      <div className={styles.ratingStars}>
+    <div className={styles.ratingWrapper}>
+      <div className={styles.rating}>
+        <div className={styles.ratingStars}>
 
-        {
-          (averageRating > 0) ?
-            [...Array(number)].map((item, index) =>
-              <FontAwesomeIcon key={index} icon={faStar} />)
-            :
-            [...Array(5)].map((item, index) =>
-              <FontAwesomeIcon key={index} icon={faStar} className={styles.disabledStar} />)
-        }
-        {
-          rest >= 0.5 ? <FontAwesomeIcon icon={faStarHalf} /> : ''
-        }
-      </div>
-
-      <div className={styles.ratingSelect}>
-        <div className={styles.starWrapper}>
           {
-            [...Array(5)].map((item, index) =>
-              <FontAwesomeIcon
-                key={index}
-                icon={faStar}
-                className={styles.rearStar}
-                onClick={() => addRating(9999, recipeId, 5 - index)}
-              />,
-            )
+            (averageRating > 0) ?
+              [...Array(number)].map((item, index) =>
+                <FontAwesomeIcon key={index} icon={faStar} />)
+              :
+              [...Array(5)].map((item, index) =>
+                <FontAwesomeIcon key={index} icon={faStar} className={styles.disabledStar} />)
+          }
+          {
+            rest >= 0.5 ? <FontAwesomeIcon icon={faStarHalf} /> : ''
           }
         </div>
+
+        <div className={styles.ratingSelect}>
+          <div className={styles.starWrapper}>
+            {
+              [...Array(5)].map((item, index) =>
+                <FontAwesomeIcon
+                  key={index}
+                  icon={faStar}
+                  className={styles.rearStar}
+                  onClick={() => addRating(9999, recipeId, 5 - index)}
+                />,
+              )
+            }
+          </div>
+        </div>
       </div>
+      <p className={styles.numberOfRatings}>{numberOfRatings}</p>
     </div>
   );
 };
@@ -64,4 +67,5 @@ Rating.propTypes = {
   averageRating: PropTypes.number.isRequired,
   addRating: PropTypes.func.isRequired,
   recipeId: PropTypes.number.isRequired,
+  numberOfRatings: PropTypes.number.isRequired,
 };

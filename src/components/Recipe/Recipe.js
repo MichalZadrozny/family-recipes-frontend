@@ -20,14 +20,9 @@ const Recipe = ({ recipe }) => (
 
     <div className={styles.info}>
       <div className={styles.details}>
-        <div>
-          <OverlayTrigger placement='top' overlay={<Tooltip>Tooltip</Tooltip>}>
-            <>
-              <Rating averageRating={recipe.averageRating} />
-              <p>{recipe.numberOfRatings}</p>
-            </>
-          </OverlayTrigger>
-        </div>
+        <OverlayTrigger placement='top' overlay={<Tooltip>Tooltip</Tooltip>}>
+          <Rating averageRating={recipe.averageRating} numberOfRatings={recipe.numberOfRatings} />
+        </OverlayTrigger>
         <p>Czas: {recipe.preparationTime} min</p>
         <DietIcon diet={recipe.diet} />
       </div>

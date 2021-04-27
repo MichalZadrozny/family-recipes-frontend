@@ -1,9 +1,26 @@
+.ratingWrapper {
+  height: 6rem;
+  width: 14rem;
+}
+
 .rating {
   color: gold;
   font-size: 2rem;
+  position: absolute;
 
   &Select {
-    display: none;
+    position: relative;
+    top: -3rem;
+
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &Stars {
+    position: relative;
+
+    opacity: 1;
+    transition: opacity 0.3s;
   }
 
   svg {
@@ -11,13 +28,15 @@
   }
 }
 
-.rating:hover {
+.rating:hover, .rating:active {
   .ratingStars {
-    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
   }
 
   .ratingSelect {
-    display: block;
+    opacity: 1;
+    transition: opacity 0.3s;
   }
 }
 
@@ -27,7 +46,6 @@
 
 .rearStar {
   color: #fff;
-  transition: all 0.5s;
 }
 
 .disabledStar {
@@ -62,4 +80,10 @@
 
 .rearStar:nth-child(5):hover ~ svg {
   color: gold;
+}
+
+.numberOfRatings {
+  position: relative;
+  color: black;
+  top: 3rem;
 }
