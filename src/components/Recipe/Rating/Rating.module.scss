@@ -1,0 +1,65 @@
+.rating {
+  color: gold;
+  font-size: 2rem;
+
+  &Select {
+    display: none;
+  }
+
+  svg {
+    margin: 2px;
+  }
+}
+
+.rating:hover {
+  .ratingStars {
+    display: none;
+  }
+
+  .ratingSelect {
+    display: block;
+  }
+}
+
+.starWrapper {
+  direction: rtl;
+}
+
+.rearStar {
+  color: #fff;
+  transition: all 0.5s;
+}
+
+.disabledStar {
+  color: gray;
+}
+
+.star-wrapper a:hover {
+  color: gold;
+  transform: scale(1.3);
+}
+
+.rearStar:hover {
+  color: gold;
+  transform: scale(1.3);
+}
+
+.rearStar:nth-child(1):hover ~ svg {
+  color: gold;
+}
+
+.rearStar:nth-child(2):hover ~ svg {
+  color: gold;
+}
+
+.rearStar:nth-child(3):hover ~ svg {
+  color: gold;
+}
+
+.rearStar:nth-child(4):hover ~ svg {
+  color: gold;
+}
+
+.rearStar:nth-child(5):hover ~ svg {
+  color: gold;
+}

@@ -10,6 +10,11 @@ const initialState = {
 
 const recipe = (state = initialState, action) => {
   switch (action.type) {
+    case (recipeConstants.ADD_RATING_SUCCESS):
+      return {
+        ...state,
+        selectedRecipe: action.recipe,
+      };
     case (recipeConstants.ADD_RECIPE_REQUEST):
       return {
         ...state,

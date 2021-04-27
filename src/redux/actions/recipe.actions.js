@@ -72,13 +72,37 @@ const getSingleRecipe = (id) => {
     dispatch(request());
     recipeService.getSingleRecipe(id)
       .then(recipe => dispatch(success(recipe)))
-      .catch(() => dispatch(failure('Recipe not found')),
+      .catch(() => dispatch(failure('Przepis nie został znaleziony')),
+      );
+  };
+};
+
+const addRating = (userId, recipeId, newRating) => {
+
+  function request() {
+    return { type: recipeConstants.ADD_RATING_REQUEST };
+  }
+
+  function success(recipe) {
+    return { type: recipeConstants.ADD_RATING_SUCCESS, recipe };
+  }
+
+  function failure(error) {
+    return { type: recipeConstants.ADD_RATING_FAILURE, error };
+  }
+
+  return dispatch => {
+    dispatch(request());
+    recipeService.addRating(userId, recipeId, newRating)
+      .then(recipe => dispatch(success(recipe)))
+      .catch(error => dispatch(failure(error)),
       );
   };
 };
 
 export default {
   addRecipe,
+  addRating,
   getRecipePreviews,
   getSingleRecipe,
 };

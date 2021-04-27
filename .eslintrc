@@ -1,5 +1,9 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
   "env": {
     "jest": true
   },
@@ -10,14 +14,25 @@
     "fetch": true
   },
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js"
+        ]
+      }
+    ],
     "import/no-unresolved": 1,
-    "no-unused-vars": 0
+    "no-unused-vars": 0,
+    "react/no-array-index-key": 0
   },
   "settings": {
     "import/resolver": {
       "node": {
-        "moduleDirectory": ["node_modules", "src/"]
+        "moduleDirectory": [
+          "node_modules",
+          "src/"
+        ]
       }
     }
   },

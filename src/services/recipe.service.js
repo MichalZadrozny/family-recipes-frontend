@@ -57,9 +57,19 @@ function addRecipe(recipe) {
   return fetch(`${appConstants.BACKEND_URL}/api/recipes`, requestOptions).then(handleResponse);
 }
 
+function addRating(userId, recipeId, newRating) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader() },
+  };
+
+  return fetch(`${appConstants.BACKEND_URL}/api/recipes/rating?userId=${userId}&recipeId=${recipeId}&newRating=${newRating}`, requestOptions).then(handleResponse);
+}
+
 
 export default {
   getRecipePreviews,
-  addRecipe,
   getSingleRecipe,
+  addRecipe,
+  addRating,
 };

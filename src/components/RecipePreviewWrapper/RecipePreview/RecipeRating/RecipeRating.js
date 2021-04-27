@@ -11,7 +11,7 @@ const RecipeRating = ({ averageRating }) => (
       averageRating > 0 ?
         <>
           <FontAwesomeIcon icon={faStar} className={styles.ratingIcon} />
-          <span>{averageRating}</span>
+          <span>{averageRating.toFixed(1)}</span>
         </>
         :
         <>
