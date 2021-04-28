@@ -23,6 +23,15 @@ function getRecipePreviews() {
   return fetch(`${appConstants.BACKEND_URL}/api/recipes`, requestOptions).then(handleResponse);
 }
 
+function getUserRecipePreviews(userId) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { ...authHeader() },
+  };
+
+  return fetch(`${appConstants.BACKEND_URL}/api/recipes/user/${userId}`, requestOptions).then(handleResponse);
+}
+
 function getSingleRecipe(id) {
   const requestOptions = {
     method: 'GET',
@@ -69,6 +78,7 @@ function addRating(userId, recipeId, newRating) {
 
 export default {
   getRecipePreviews,
+  getUserRecipePreviews,
   getSingleRecipe,
   addRecipe,
   addRating,

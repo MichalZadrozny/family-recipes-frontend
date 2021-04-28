@@ -53,6 +53,31 @@ const getRecipePreviews = () => {
   };
 };
 
+const getUserRecipePreviews = (userId) => {
+
+  function request() {
+    return { type: recipeConstants.GET_USER_PREVIEWS_REQUEST };
+  }
+
+  function success(recipes) {
+    return { type: recipeConstants.GET_USER_PREVIEWS_SUCCESS, recipes };
+  }
+
+  function failure(error) {
+    return { type: recipeConstants.GET_USER_PREVIEWS_FAILURE, error };
+  }
+
+  return dispatch => {
+
+    dispatch(request());
+    recipeService.getUserRecipePreviews(userId)
+      .then(
+        recipes => dispatch(success(recipes)),
+        error => dispatch(failure(error.toString())),
+      );
+  };
+};
+
 const getSingleRecipe = (id) => {
 
   function request() {
@@ -104,5 +129,6 @@ export default {
   addRecipe,
   addRating,
   getRecipePreviews,
+  getUserRecipePreviews,
   getSingleRecipe,
 };

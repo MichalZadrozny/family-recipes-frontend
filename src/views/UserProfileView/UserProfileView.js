@@ -3,10 +3,10 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
-import ProfileMenu from 'components/ProfileMenu/ProfileMenu';
+import ProfileWrapper from 'components/ProfileWrapper/ProfileWrapper';
 
 const UserProfileView = ({ loggedIn }) => (
-  loggedIn ? <ProfileMenu /> : <Redirect to='/login' />
+  loggedIn ? <ProfileWrapper /> : <Redirect to='/login' />
 );
 
 const mapStateToProps = (state) => ({

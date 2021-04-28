@@ -1,0 +1,25 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter {
+  &Visible {
+    margin-left: 25rem;
+    transition: margin-left 0.8s;
+  }
+
+  &Hidden {
+    margin-left: 0;
+    transition: margin-left 0.8s;
+  }
+}
+
+@media (max-width: 450px) {
+  .wrapper {
+    margin-left: 0;
+    transition: margin-left 0.8s;
+  }
+}
