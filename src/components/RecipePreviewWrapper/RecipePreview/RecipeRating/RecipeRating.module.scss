@@ -1,8 +1,10 @@
 .rating {
+
   &Icon {
-    vertical-align: -0.02;
+    vertical-align: -0.5rem;
     margin-right: 0.5rem;
-    color: gold;
+    font-size: 2.1rem;
+    color: #ffd301;
 
     &Disabled {
       color: gray;

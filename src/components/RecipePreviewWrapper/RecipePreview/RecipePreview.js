@@ -30,7 +30,9 @@ const RecipePreview = ({ imageName, name, diet, preparationTime, averageRating, 
           <RecipeRating averageRating={averageRating} />
         </Col>
       </div>
-      <p className={styles.recipeName}>{name}</p>
+      <div className={styles.recipeName}>
+        <p>{name}</p>
+      </div>
     </div>
   </Col>
 );
