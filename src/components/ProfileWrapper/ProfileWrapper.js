@@ -11,7 +11,7 @@ class ProfileWrapper extends Component {
 
   componentDidMount() {
     // eslint-disable-next-line react/destructuring-assignment
-    this.props.getUserRecipePreviews(9999);
+    this.props.getUserRecipePreviews(this.props.userId);
   }
 
   render() {
@@ -33,9 +33,11 @@ class ProfileWrapper extends Component {
 
 const mapStateToProps = (state) => {
   const { userRecipes } = state.recipes;
+  const { userId } = state.authentication.user;
   const { diet, filterIsVisible } = state.filter;
   return {
     userRecipes,
+    userId,
     diet,
     filterIsVisible,
   };
@@ -48,6 +50,7 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileWrapper);
 
 ProfileWrapper.propTypes = {
+  userId: PropTypes.string.isRequired,
   userRecipes: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,

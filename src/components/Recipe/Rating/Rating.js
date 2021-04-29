@@ -8,7 +8,7 @@ import recipeActions from 'redux/actions/recipe.actions';
 import styles from './Rating.module.scss';
 
 
-const Rating = ({ averageRating, numberOfRatings, addRating, recipeId }) => {
+const Rating = ({ averageRating, numberOfRatings, addRating, recipeId, userId }) => {
 
   const rest = averageRating % 1;
   const number = averageRating - rest;
@@ -39,7 +39,7 @@ const Rating = ({ averageRating, numberOfRatings, addRating, recipeId }) => {
                   key={index}
                   icon={faStar}
                   className={styles.rearStar}
-                  onClick={() => addRating(9999, recipeId, 5 - index)}
+                  onClick={() => addRating(userId, recipeId, 5 - index)}
                 />,
               )
             }
@@ -54,7 +54,9 @@ const Rating = ({ averageRating, numberOfRatings, addRating, recipeId }) => {
 
 const mapStateToProps = (state) => {
   const recipeId = state.recipes.selectedRecipe.id;
-  return { recipeId };
+  const { userId } = state.authentication.user;
+
+  return { recipeId, userId };
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -64,6 +66,7 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Rating);
 
 Rating.propTypes = {
+  userId: PropTypes.string.isRequired,
   averageRating: PropTypes.number.isRequired,
   addRating: PropTypes.func.isRequired,
   recipeId: PropTypes.number.isRequired,
