@@ -3,15 +3,23 @@
   background-image: linear-gradient(90deg, #37ad9b, #80afaf);
   box-shadow: 0 0 8px rgba(0, 0, 0, .5);
   color: #e8f1ef;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: fixed;
+
   height: 100%;
   width: 25rem;
-  font-size: 1.5rem;
   padding: 3.5rem;
-  position: fixed;
   z-index: 2;
+
+  font-size: 1.6rem;
+
+  &Label {
+    font-size: 2rem;
+    font-weight: bold;
+  }
 
   div {
     width: 100%;
@@ -64,6 +72,11 @@
     visibility: hidden;
     opacity: 0;
   }
+}
+
+.clearButton {
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 @media (max-width: 450px) {

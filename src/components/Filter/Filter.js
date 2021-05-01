@@ -23,7 +23,7 @@ const Filter = ({ clearFilterCheckboxes, diet, toggleFilter, filterIsVisible }) 
 
         <FontAwesomeIcon icon={faArrowLeft} onClick={toggleFilter} className={styles.hideButton} />
 
-        <h2>Dieta</h2>
+        <h2 className={styles.filterLabel}>Dieta</h2>
         <DietCheckbox diet={diet.meat} dietName='meat' label='Mięsna' />
         <br />
         <DietCheckbox diet={diet.vegetarian} dietName='vegetarian' label='Wegetariańska' />
@@ -32,7 +32,7 @@ const Filter = ({ clearFilterCheckboxes, diet, toggleFilter, filterIsVisible }) 
       </Container>
       <Row>
         <Col>
-          <Button variant='light' onClick={clearFilterCheckboxes}>Wyczyść</Button>
+          <Button variant='light' onClick={clearFilterCheckboxes} className={styles.clearButton}>Wyczyść</Button>
         </Col>
       </Row>
     </form>
