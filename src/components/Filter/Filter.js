@@ -11,9 +11,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from 'components/Filter/Filter.module.scss';
 import filterActions from 'redux/actions/filter.actions';
-import DietCheckbox from './DietCheckbox/DietCheckbox';
+import RangeSlider from './RangeSlider/RangeSlider';
+import DietFilter from './DietFilter/DietFilter';
 
-const Filter = ({ clearFilterCheckboxes, diet, toggleFilter, filterIsVisible }) => (
+const Filter = ({ clearFilter, diet, toggleFilter, filterIsVisible }) => (
   <div className={styles.filterWrapper}>
     <FontAwesomeIcon icon={faArrowRight} onClick={toggleFilter}
                      className={[styles.showButton, filterIsVisible ? styles.showButtonHidden : ''].join(' ')} />
@@ -23,16 +24,12 @@ const Filter = ({ clearFilterCheckboxes, diet, toggleFilter, filterIsVisible }) 
 
         <FontAwesomeIcon icon={faArrowLeft} onClick={toggleFilter} className={styles.hideButton} />
 
-        <h2 className={styles.filterLabel}>Dieta</h2>
-        <DietCheckbox diet={diet.meat} dietName='meat' label='Mięsna' />
-        <br />
-        <DietCheckbox diet={diet.vegetarian} dietName='vegetarian' label='Wegetariańska' />
-        <br />
-        <DietCheckbox diet={diet.vegan} dietName='vegan' label='Wegańska' />
+        <DietFilter diet={diet} />
+        <RangeSlider />
       </Container>
       <Row>
         <Col>
-          <Button variant='light' onClick={clearFilterCheckboxes} className={styles.clearButton}>Wyczyść</Button>
+          <Button variant='light' onClick={clearFilter} className={styles.clearButton}>Wyczyść</Button>
         </Col>
       </Row>
     </form>
@@ -44,7 +41,7 @@ const mapStateToProps = ({ filter }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  clearFilterCheckboxes: event => dispatch(filterActions.clearFilterCheckboxes(event)),
+  clearFilter: event => dispatch(filterActions.clearFilter(event)),
   toggleFilter: () => dispatch(filterActions.toggleFilter()),
 });
 
@@ -52,7 +49,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Filter);
 
 Filter.propTypes = {
   diet: PropTypes.objectOf(bool).isRequired,
-  clearFilterCheckboxes: PropTypes.func.isRequired,
+  clearFilter: PropTypes.func.isRequired,
   toggleFilter: PropTypes.func.isRequired,
   filterIsVisible: PropTypes.bool.isRequired,
 };

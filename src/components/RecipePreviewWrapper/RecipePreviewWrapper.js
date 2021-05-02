@@ -1,43 +1,52 @@
 import React from 'react';
 import PropTypes, { bool } from 'prop-types';
 import { Row } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 import appConstants from 'constants/app.constants';
 import RecipePreview from 'components/RecipePreviewWrapper/RecipePreview/RecipePreview';
 import styles from 'components/RecipePreviewWrapper/RecipePreviewWrapper.module.scss';
 
-const RecipePreviewWrapper = ({ items, diet }) => (
+const filterItems = (items, diet, maxTime) => {
+
+  let filteredItems = items;
+
+  if (!(diet.meat === false && diet.vegetarian === false && diet.vegan === false)) {
+    filteredItems = items.filter(item => diet[item.diet.toLowerCase()]);
+  }
+
+  filteredItems = maxTime >= 0 ? filteredItems.filter(item => item.preparationTime <= maxTime) : filteredItems;
+
+  return filteredItems;
+};
+
+const printItems = items => (
+  items.map((item) => (
+    <RecipePreview
+      key={item.id}
+      id={item.id}
+      name={item.name}
+      preparationTime={item.preparationTime}
+      diet={item.diet}
+      averageRating={item.averageRating}
+      imageName={item.imageName === null ? undefined : (appConstants.MEDIA_URL + item.imageName)}
+    />
+  ))
+);
+
+const RecipePreviewWrapper = ({ items, diet, maxTime }) => (
   <Row className={styles.recipePreviewWrapper}>
     {
-      diet.meat === false && diet.vegetarian === false && diet.vegan === false ?
-        items.map((item) => (
-          <RecipePreview
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            preparationTime={item.preparationTime}
-            diet={item.diet}
-            averageRating={item.averageRating}
-            imageName={item.imageName === null ? undefined : (appConstants.MEDIA_URL + item.imageName)}
-          />
-        ))
-        :
-        items.filter(item => diet[item.diet.toLowerCase()]).map((item) => (
-          /* eslint-disable react/jsx-props-no-spreading */
-          <RecipePreview
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            preparationTime={item.preparationTime}
-            diet={item.diet}
-            averageRating={item.averageRating}
-            imageName={item.imageName === null ? undefined : (appConstants.MEDIA_URL + item.imageName)}
-          />
-        ))}
+      printItems(filterItems(items, diet, maxTime))
+    }
   </Row>
 );
 
-export default RecipePreviewWrapper;
+const mapStateToProps = ({ filter }) => ({
+  maxTime: filter.maxTime,
+});
+
+export default connect(mapStateToProps, null)(RecipePreviewWrapper);
 
 RecipePreviewWrapper.propTypes = {
   items: PropTypes.arrayOf(
@@ -51,4 +60,5 @@ RecipePreviewWrapper.propTypes = {
     }),
   ).isRequired,
   diet: PropTypes.objectOf(bool).isRequired,
+  maxTime: PropTypes.number.isRequired,
 };

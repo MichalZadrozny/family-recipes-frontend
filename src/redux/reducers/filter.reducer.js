@@ -8,6 +8,7 @@ const initialState = {
     vegan: false,
   },
   filterIsVisible: true,
+  maxTime: -1,
 };
 
 const filter = (state = initialState, action) => {
@@ -20,9 +21,10 @@ const filter = (state = initialState, action) => {
           [action.payload.event.target.id]: !state.diet[action.payload.event.target.id],
         },
       };
-    case(filterConstants.CLEAR_FILTER_CHECKBOXES):
+    case(filterConstants.CLEAR_FILTER):
       return {
         ...state,
+        maxTime: -1,
         diet: {
           vegan: false,
           vegetarian: false,
@@ -33,6 +35,11 @@ const filter = (state = initialState, action) => {
       return {
         ...state,
         filterIsVisible: !state.filterIsVisible,
+      };
+    case(filterConstants.CHANGE_MAX_TIME):
+      return {
+        ...state,
+        maxTime: action.payload.event.target.value,
       };
     default:
       return state;

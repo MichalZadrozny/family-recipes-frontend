@@ -7,8 +7,8 @@ export const handleCheckboxChange = (event) => ({
   },
 });
 
-const clearFilterCheckboxes = (event) => ({
-  type: filterConstants.CLEAR_FILTER_CHECKBOXES,
+const clearFilter = (event) => ({
+  type: filterConstants.CLEAR_FILTER,
   payload: {
     event,
   },
@@ -18,7 +18,15 @@ const toggleFilter = () => ({
   type: filterConstants.TOGGLE_FILTER,
 });
 
+const changeMaxTimeValue = (event) => ({
+  type: filterConstants.CHANGE_MAX_TIME,
+  payload: {
+    event,
+  },
+});
+
 export default {
-  clearFilterCheckboxes,
+  clearFilter,
+  changeMaxTimeValue,
   toggleFilter,
 };
