@@ -1,0 +1,44 @@
+.timeFilter {
+  h2 {
+    margin: 0;
+  }
+}
+
+.slider {
+
+  &Wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem;
+
+    span {
+      padding: 0 1rem;
+    }
+
+    div {
+      padding-bottom: 1rem;
+    }
+
+    .timeInput {
+      background: transparent;
+      border: none;
+      width: 5rem;
+      color: #e8f1ef;
+    }
+
+    .timeInput:focus {
+      outline: none;
+      box-shadow: 0 0 4px #e8f1ef;
+      border-radius: 5px;
+    }
+  }
+
+  &Box {
+    display: flex;
+
+    input {
+      width: 85%;
+    }
+  }
+}

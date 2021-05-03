@@ -39,7 +39,7 @@ const filter = (state = initialState, action) => {
     case(filterConstants.CHANGE_MAX_TIME):
       return {
         ...state,
-        maxTime: action.payload.event.target.value,
+        maxTime: action.payload.event,
       };
     default:
       return state;

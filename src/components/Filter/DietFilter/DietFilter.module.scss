@@ -1,3 +1,11 @@
-.dietBox {
-  padding: 1.5rem;
+.diet {
+  &Box {
+    padding: 1.5rem;
+  }
+
+  &Wrapper {
+    h2 {
+      margin: 0;
+    }
+  }
 }
