@@ -5,8 +5,9 @@ import filterActions from 'redux/actions/filter.actions';
 
 import styles from './RangeSlider.module.scss';
 
-const getInputValue = (maxTime) => {
+const getInputValue = (maxTime, max) => {
   if (maxTime > 0) return maxTime;
+  if (maxTime < 0) return max;
   return 0;
 };
 
@@ -27,7 +28,7 @@ const RangeSlider = ({ max, changeMaxTimeValue, maxTime }) => (
     <div className={styles.sliderWrapper}>
       <div>
         Maks. czas: <input
-        value={getInputValue(maxTime)}
+        value={getInputValue(maxTime, max)}
         onChange={e => handleChange(e, changeMaxTimeValue)}
         className={styles.timeInput}
       /> min
