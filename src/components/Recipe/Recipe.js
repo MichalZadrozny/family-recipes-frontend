@@ -6,6 +6,7 @@ import appConstants from 'constants/app.constants';
 import DietIcon from 'components/Icon/DietIcon/DietIcon';
 import styles from './Recipe.module.scss';
 import Rating from './Rating/Rating';
+import AlertToast from '../AlertToast/AlertToast';
 
 const Recipe = ({ recipe }) => (
   <div className={styles.recipeContainer}>
@@ -18,6 +19,7 @@ const Recipe = ({ recipe }) => (
         </div> : ''
     }
 
+    <AlertToast />
     <div className={styles.info}>
       <div className={styles.details}>
         <OverlayTrigger placement='top' overlay={<Tooltip>Tooltip</Tooltip>}>
