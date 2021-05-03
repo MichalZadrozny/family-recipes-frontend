@@ -9,7 +9,7 @@
   height: 11rem;
   width: 100vw;
   z-index: 5;
-  transition: all 0.5s;
+  transition: height 0.5s;
 
   a {
     text-decoration: none;
@@ -39,6 +39,6 @@
   .header {
     padding: 1.5rem 3rem 1.5rem 2.6rem;
     height: 8rem;
-    transition: all 0.5s;
+    transition: height 0.5s;
   }
 }
