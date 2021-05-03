@@ -23,7 +23,9 @@ class ProfileWrapper extends Component {
           diet={diet}
         />
         <div className={[styles.wrapper, !filterIsVisible ? styles.filterHidden : styles.filterVisible].join(' ')}>
-          <p>Ilość dodanych przepisów: {userRecipes.length}</p>
+          <div className={styles.numberOfRecipes}>
+            <p>Ilość dodanych przepisów: {userRecipes.length}</p>
+          </div>
           <RecipePreviewWrapper items={userRecipes} diet={diet} />
         </div>
       </>

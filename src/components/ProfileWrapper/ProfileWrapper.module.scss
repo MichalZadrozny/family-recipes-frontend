@@ -3,6 +3,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .numberOfRecipes {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 4rem;
+    margin-bottom: -2.5rem;
+
+    p {
+      margin: 0;
+    }
+  }
 }
 
 .filter {
@@ -17,9 +28,21 @@
   }
 }
 
+@media (max-width: 950px) {
+  .wrapper {
+    .numberOfRecipes {
+      margin-top: 3rem;
+    }
+  }
+}
+
 @media (max-width: 450px) {
   .wrapper {
     margin-left: 0;
     transition: margin-left 0.8s;
+
+    .numberOfRecipes {
+      font-size: 1.8rem;
+    }
   }
 }
