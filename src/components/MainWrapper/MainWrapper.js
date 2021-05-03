@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes, { bool } from 'prop-types';
 
 import recipeActions from 'redux/actions/recipe.actions';
+import alertActions from 'redux/actions/alert.actions';
 import RecipePreviewWrapper from 'components/RecipePreviewWrapper/RecipePreviewWrapper';
-import Filter from '../Filter/Filter';
-import AlertToast from '../AlertToast/AlertToast';
+import Filter from 'components/Filter/Filter';
+import AlertToast from 'components/AlertToast/AlertToast';
 import styles from './MainWrapper.module.scss';
 
 class MainWrapper extends Component {
@@ -14,6 +15,11 @@ class MainWrapper extends Component {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.getRecipePreviews();
   }
+
+  componentWillUnmount() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.clear();
+  };
 
   render() {
     const { items, diet, filterIsVisible } = this.props;
@@ -45,6 +51,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
   getRecipePreviews: () => dispatch(recipeActions.getRecipePreviews()),
+  clear: () => dispatch(alertActions.clear()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainWrapper);
@@ -62,6 +69,7 @@ MainWrapper.propTypes = {
     }),
   ).isRequired,
   getRecipePreviews: PropTypes.func.isRequired,
+  clear: PropTypes.func.isRequired,
   diet: PropTypes.objectOf(bool).isRequired,
   filterIsVisible: PropTypes.bool.isRequired,
 };
