@@ -6,6 +6,7 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 import recipeActions from 'redux/actions/recipe.actions';
 import Recipe from 'components/Recipe/Recipe';
 import styles from './RecipeView.module.scss';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 class RecipeView extends Component {
 
@@ -28,7 +29,7 @@ class RecipeView extends Component {
     return (
       <div className={styles.recipeContainer}>
         {
-          selectedRecipe ? <Recipe recipe={selectedRecipe} /> : ''
+          selectedRecipe ? <Recipe recipe={selectedRecipe} /> : <LoadingSpinner />
         }
       </div>
     );
