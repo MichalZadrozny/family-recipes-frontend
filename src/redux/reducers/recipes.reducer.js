@@ -52,12 +52,6 @@ const recipe = (state = initialState, action) => {
         error: action.error,
         loading: false,
       };
-    case (recipeConstants.GET_RECIPE_REQUEST):
-      return {
-        ...state,
-        selectedRecipe: undefined,
-        error: undefined,
-      };
     case(recipeConstants.GET_USER_PREVIEWS_REQUEST):
       return {
         ...state,
@@ -76,16 +70,25 @@ const recipe = (state = initialState, action) => {
         error: action.error,
         loading: false,
       };
+    case (recipeConstants.GET_RECIPE_REQUEST):
+      return {
+        ...state,
+        selectedRecipe: undefined,
+        error: undefined,
+        loading: true,
+      };
     case (recipeConstants.GET_RECIPE_SUCCESS):
       return {
         ...state,
         selectedRecipe: action.recipe,
+        loading: false,
       };
     case(recipeConstants.GET_RECIPE_FAILURE):
       return {
         ...state,
         selectedRecipe: undefined,
         error: action.error,
+        loading: false,
       };
     default:
       return state;

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import appConstants from 'constants/app.constants';
 import RecipePreview from 'components/RecipePreviewWrapper/RecipePreview/RecipePreview';
 import styles from 'components/RecipePreviewWrapper/RecipePreviewWrapper.module.scss';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const filterItems = (items, diet, maxTime) => {
 
@@ -36,6 +37,7 @@ const printItems = items => (
 
 const RecipePreviewWrapper = ({ items, diet, maxTime }) => (
   <Row className={styles.recipePreviewWrapper}>
+    <LoadingSpinner />
     {
       printItems(filterItems(items, diet, maxTime))
     }

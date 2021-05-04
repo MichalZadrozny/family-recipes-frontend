@@ -2,11 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
 }
 
 .main {
   display: flex;
-  height: auto;
+  height: 100%;
   margin-top: 11rem;
   transition: all 0.5s;
 }
