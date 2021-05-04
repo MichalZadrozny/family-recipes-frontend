@@ -26,7 +26,8 @@ const validationSchema = Yup.object().shape({
     .min(2, '*Nazwa musi się składać co najmniej z dwóch znaków')
     .max(54, '*Nazwa nie może składać się z więcej niż 54 znaków')
     .required('*Przepis musi posiadać nazwę'),
-  description: Yup.string(),
+  description: Yup.string()
+    .max(1000, '*Opis nie może składać się z więcej niż 1000 znaków'),
   ingredients: Yup.array().of(
     Yup.object().shape({
       name: Yup.string().required('*Nazwa jest wymagana'),
