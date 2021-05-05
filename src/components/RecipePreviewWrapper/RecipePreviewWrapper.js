@@ -37,7 +37,9 @@ const printItems = items => (
 
 const RecipePreviewWrapper = ({ items, diet, maxTime }) => (
   <Row className={styles.recipePreviewWrapper}>
-    <LoadingSpinner />
+    {
+      items.length > 0 ? '' : <LoadingSpinner />
+    }
     {
       printItems(filterItems(items, diet, maxTime))
     }
