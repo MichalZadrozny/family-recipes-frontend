@@ -74,7 +74,6 @@ const recipe = (state = initialState, action) => {
       return {
         ...state,
         selectedRecipe: undefined,
-        error: undefined,
         loading: true,
       };
     case (recipeConstants.GET_RECIPE_SUCCESS):
@@ -87,7 +86,6 @@ const recipe = (state = initialState, action) => {
       return {
         ...state,
         selectedRecipe: undefined,
-        error: action.error,
         loading: false,
       };
     default:

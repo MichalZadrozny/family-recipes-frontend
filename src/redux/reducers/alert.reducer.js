@@ -13,7 +13,18 @@ const alert = (state = {}, action) => {
         message: action.message,
       };
     case alertConstants.CLEAR:
+      if (state.alert && state.alert.doNotClear) {
+        return {
+          ...state,
+          doNotClear: false,
+        };
+      }
       return {};
+    case alertConstants.DO_NOT_CLEAR:
+      return {
+        ...state,
+        doNotClear: action.doNotClear,
+      };
     default:
       return state;
   }

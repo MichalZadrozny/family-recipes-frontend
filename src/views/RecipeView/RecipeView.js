@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
 import recipeActions from 'redux/actions/recipe.actions';
+import alertActions from 'redux/actions/alert.actions';
 import Recipe from 'components/Recipe/Recipe';
 import styles from './RecipeView.module.scss';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
@@ -16,10 +17,11 @@ class RecipeView extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { error, history, selectedRecipe } = this.props;
+    const { error, history, selectedRecipe, doNotClear } = this.props;
 
     if (!selectedRecipe && error) {
-      history.push('/not-found');
+      doNotClear();
+      history.push('/');
     }
   }
 
@@ -38,17 +40,19 @@ class RecipeView extends Component {
 
 const mapStateToProps = (state) => ({
   selectedRecipe: state.recipes.selectedRecipe,
-  error: state.recipes.error,
+  error: state.alert.message,
 });
 
 const mapDispatchToProps = dispatch => ({
   getSingleRecipe: id => dispatch(recipeActions.getSingleRecipe(id)),
+  doNotClear: () => dispatch(alertActions.doNotClear()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeView);
 
 RecipeView.propTypes = {
   getSingleRecipe: PropTypes.func.isRequired,
+  doNotClear: PropTypes.func.isRequired,
   match: PropTypes.objectOf(PropTypes.any).isRequired,
   selectedRecipe: PropTypes.objectOf(PropTypes.any),
   history: ReactRouterPropTypes.history.isRequired,

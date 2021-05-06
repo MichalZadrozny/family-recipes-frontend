@@ -1,5 +1,6 @@
 import recipeConstants from 'constants/recipe.constants';
 import recipeService from 'services/recipe.service';
+import alertActions from './alert.actions';
 
 const addRecipe = (recipe) => {
 
@@ -88,8 +89,8 @@ const getSingleRecipe = (id) => {
     return { type: recipeConstants.GET_RECIPE_SUCCESS, recipe };
   }
 
-  function failure(error) {
-    return { type: recipeConstants.GET_RECIPE_FAILURE, error };
+  function failure() {
+    return { type: recipeConstants.GET_RECIPE_FAILURE };
   }
 
   return dispatch => {
@@ -97,7 +98,9 @@ const getSingleRecipe = (id) => {
     dispatch(request());
     recipeService.getSingleRecipe(id)
       .then(recipe => dispatch(success(recipe)))
-      .catch(() => dispatch(failure('Przepis nie został znaleziony')),
+      .catch(
+        () => dispatch(failure(),
+          dispatch(alertActions.error(['Przepis nie został znaleziony', 'Podano nieprawidłowy adres lub szukany przepis już nie istnieje']))),
       );
   };
 };

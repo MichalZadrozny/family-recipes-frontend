@@ -6,7 +6,6 @@ import MainTemplate from 'templates/MainTemplate';
 import AddRecipeView from 'views/AddRecipeView/AddRecipeView';
 import UserProfileView from 'views/UserProfileView/UserProfileView';
 import LoginView from 'views/LoginView/LoginView';
-import NotFoundView from 'views/NotFoundView/NotFoundView';
 import RecipeView from 'views/RecipeView/RecipeView';
 
 const Root = () => (
@@ -17,7 +16,6 @@ const Root = () => (
         <Route path='/add-recipe' component={AddRecipeView} />
         <Route path='/user' component={UserProfileView} />
         <Route path='/login' component={LoginView} />
-        <Route path='/not-found' component={NotFoundView} />
         <Route path='/recipe/:id' component={RecipeView} />
         <Redirect to='/' />
       </Switch>
