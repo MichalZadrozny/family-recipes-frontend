@@ -10,57 +10,64 @@ import AlertToast from '../AlertToast/AlertToast';
 
 const Recipe = ({ recipe }) => (
   <div className={styles.recipeContainer}>
-    <h1>{recipe.name}</h1>
+    <h1 className={styles.recipeName}>{recipe.name}</h1>
 
     {
       recipe.imageName ?
-        <div className={styles.imageBox}>
+        <div>
           <img src={appConstants.MEDIA_URL + recipe.imageName} alt={recipe.name} className={styles.image} />
         </div> : ''
     }
 
     <AlertToast />
-    <div className={styles.info}>
-      <div className={styles.details}>
-        <OverlayTrigger placement='top' overlay={<Tooltip>Tooltip</Tooltip>}>
-          <Rating averageRating={recipe.averageRating} numberOfRatings={recipe.numberOfRatings} />
-        </OverlayTrigger>
-        <p>Czas: {recipe.preparationTime} min</p>
-        <DietIcon diet={recipe.diet} />
-      </div>
+    <div className={[styles.info, styles.segment].join(' ')}>
+      <Row>
+        <Col className={styles.infoRating} xs={12} md={4}>
+          <OverlayTrigger placement='top' overlay={<Tooltip>Tooltip</Tooltip>}>
+            <Rating averageRating={recipe.averageRating} numberOfRatings={recipe.numberOfRatings} />
+          </OverlayTrigger>
+        </Col>
+        <Col className={styles.infoCol} xs={6} md={4}>
+          <p>Czas: {recipe.preparationTime} min</p>
+        </Col>
+        <Col className={styles.infoCol} xs={6} md={4}>
+          <DietIcon diet={recipe.diet} />
+          <span className={styles.dietLabel}>Wegetariańska</span>
+        </Col>
+      </Row>
 
       {
         recipe.nutrients ?
-          <div className={styles.nutrients}>
-            <p><span className={styles.nutrientsName}>Kalorie: </span>{recipe.nutrients.calories}</p>
-            <p><span className={styles.nutrientsName}>Białka: </span>{recipe.nutrients.proteins}</p>
-            <p><span className={styles.nutrientsName}>Tłuszcze: </span>{recipe.nutrients.fats}</p>
-            <p><span className={styles.nutrientsName}>Węglowodany: </span>{recipe.nutrients.carbs}</p>
-          </div> : ''
+          <Row className={styles.nutrients}>
+            <Col xs={6} md={3}>
+              <span className={styles.nutrientsName}>Kalorie</span>
+              <p>{recipe.nutrients.calories}</p>
+            </Col>
+            <Col xs={6} md={3}>
+              <span className={styles.nutrientsName}>Białka</span>
+              <p>{recipe.nutrients.proteins}</p>
+            </Col>
+            <Col xs={6} md={3}>
+              <span className={styles.nutrientsName}>Tłuszcze</span>
+              <p>{recipe.nutrients.fats}</p>
+            </Col>
+            <Col xs={6} md={3}>
+              <span className={[styles.nutrientsName, styles.carbsLong].join(' ')}>Węglowodany</span>
+              <span className={[styles.nutrientsName, styles.carbsShort].join(' ')}>Węgl.</span>
+              <p>{recipe.nutrients.carbs}</p></Col>
+          </Row> : ''
       }
 
       <p>Autor: {recipe.username}</p>
     </div>
 
-    <p>{recipe.description}</p>
-
+    <div className={[styles.segment, styles.description].join(' ')}>
+      <h3>Opis:</h3>
+      <p>{recipe.description}</p>
+    </div>
 
     <Row className={styles.lists}>
-      <Col xs={6}>
-        <h3>Kroki do wykonania:</h3>
-        <ol>
-          {
-            // eslint-disable-next-line react/prop-types
-            recipe.steps.map((item, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <li key={index}>
-                <p>{item}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </Col>
-      <Col md='auto' xs={4}>
+      <Col md='auto' xs={12} lg={5} className={styles.segment}>
         <h3>Składniki:</h3>
         <ul>
           {
@@ -84,6 +91,20 @@ const Recipe = ({ recipe }) => (
             ))
           }
         </ul>
+      </Col>
+      <Col xs={12} lg={5} className={[styles.segment, styles.steps].join(' ')}>
+        <h3>Kroki do wykonania:</h3>
+        <ol>
+          {
+            // eslint-disable-next-line react/prop-types
+            recipe.steps.map((item, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <li key={index}>
+                <p>{item}</p>
+              </li>
+            ))
+          }
+        </ol>
       </Col>
     </Row>
 

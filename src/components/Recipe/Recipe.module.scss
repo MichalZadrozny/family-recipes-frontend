@@ -1,28 +1,60 @@
-.recipeContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.recipe {
+  &Name {
+    font-weight: 700;
+    font-size: 2.8em;
+    transition: font-size, 1s;
+  }
+
+  &Container {
+    text-align: center;
+    font-size: 1.6rem;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
-.details {
-  display: flex;
-  justify-content: space-around;
+h1 {
+  font-size: 2.8em;
+}
+
+h3 {
+  font-weight: bold;
 }
 
 .image {
-  width: 50rem;
-  height: 35rem;
-}
-
-.imageBox {
-
+  width: 26em;
+  height: 20em;
+  transition: width, height, 1s;
+  margin-top: 2.5rem;
 }
 
 .info {
   background-color: lightgrey;
   padding: 2rem 1rem 1rem;
-  margin: 3rem 0;
   width: 100%;
+
+  &Rating {
+    display: flex;
+    justify-content: center;
+  }
+
+  .dietLabel {
+    margin-left: 1rem;
+  }
+
+  &Col {
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      margin: 0;
+    }
+  }
 }
 
 .nutrients {
@@ -32,6 +64,22 @@
   &Name {
     font-weight: bold;
   }
+
+  .carbs {
+    &Short {
+      display: none;
+    }
+  }
+}
+
+.segment {
+  margin-top: 4rem;
+}
+
+.description {
+  width: 90%;
+  text-align: left;
+  overflow-wrap: break-word;
 }
 
 .lists {
@@ -42,7 +90,6 @@
 
 .ingredient {
   display: flex;
-  font-size: 0.85em;
 
   &Name {
     margin-right: 1rem;
@@ -53,6 +100,54 @@
   }
 }
 
-h1 {
-  font-size: 2.8em;
+.steps {
+  padding-right: 3rem;
+}
+
+@media (max-width: 500px) {
+
+  .recipe {
+    &Name {
+      font-size: 3.5rem;
+      transition: font-size, 1s;
+    }
+
+    &Container {
+      font-size: 1.5rem;
+
+    }
+  }
+
+  .image {
+    width: 70vw;
+    height: 55vw;
+    transition: width, height, 1s;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .recipe {
+    &Name {
+      font-size: 2.9rem;
+      transition: font-size, 1s;
+    }
+  }
+
+  .dietLabel {
+    display: none;
+  }
+
+  .nutrients {
+    .carbs {
+
+      &Long {
+        display: none;
+      }
+
+      &Short {
+        display: initial;
+      }
+    }
+  }
 }
