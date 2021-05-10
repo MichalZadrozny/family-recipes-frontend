@@ -95,15 +95,17 @@ const form = (props) => (
       ) : null}
     </Form.Group>
 
-    <Form.Group controlId='termsOfUse'>
-      <Form.Label>Warunki korzystania</Form.Label>
-      <Form.Control
-        type='checkbox'
-        name='termsOfUse'
-        onChange={props.handleChange}
-        onBlur={props.handleBlur}
-        value={props.values.termsOfUse}
-        className={props.touched.termsOfUse && props.errors.termsOfUse ? styles.error : null} />
+    <Form.Group controlId='termsOfUse' className={styles.termsOfUse}>
+      <div>
+        <Form.Label>Warunki korzystania</Form.Label>
+        <Form.Control
+          type='checkbox'
+          name='termsOfUse'
+          onChange={props.handleChange}
+          onBlur={props.handleBlur}
+          value={props.values.termsOfUse}
+          className={props.touched.termsOfUse && props.errors.termsOfUse ? styles.error : null} />
+      </div>
       {props.touched.termsOfUse && props.errors.termsOfUse ? (
         <div className={styles.errorMessage}>{props.errors.termsOfUse}</div>
       ) : null}
@@ -111,7 +113,7 @@ const form = (props) => (
 
     <Row className={styles.submit}>
       <Button variant='primary' type='submit' disabled={props.isSubmitting}>
-        Submit
+        Wyślij
       </Button>
     </Row>
   </Form>
