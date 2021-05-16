@@ -1,7 +1,7 @@
 import userConstants from 'constants/user.constants';
 
 const user = JSON.parse(localStorage.getItem('user'));
-const initialState = user ? { loggedIn: true, user } : { loggedIn: false };
+const initialState = user ? { loggedIn: true, user } : { loggedIn: false, passwordRecovery: false };
 
 const authentication = (state = initialState, action) => {
   switch (action.type) {
@@ -22,6 +22,14 @@ const authentication = (state = initialState, action) => {
     case userConstants.LOGOUT:
       return {
         loggedIn: false,
+      };
+    case userConstants.TOGGLE_PASSWORD_RECOVERY:
+      return {
+        passwordRecovery: !state.passwordRecovery,
+      };
+    case userConstants.TOGGLE_PASSWORD_RECOVERY_FALSE:
+      return {
+        passwordRecovery: false,
       };
     default:
       return state;

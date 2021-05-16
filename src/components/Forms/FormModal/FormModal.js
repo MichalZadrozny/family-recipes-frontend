@@ -30,5 +30,5 @@ FormModal.propTypes = {
   onHide: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  form: PropTypes.elementType.isRequired,
+  form: PropTypes.objectOf(PropTypes.any).isRequired,
 };

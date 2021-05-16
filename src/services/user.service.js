@@ -7,17 +7,11 @@ function logout() {
 function handleResponse(response) {
   return response.text().then(text => {
 
-    if (response.status === 409)
-      return Promise.reject(text);
-
-    const data = text && JSON.parse(text);
-
     if (!response.ok) {
-      const error = (data && data.message) || response.statusText;
-      return Promise.reject(error);
+      return Promise.reject(text);
     }
 
-    return data;
+    return text && JSON.parse(text);
   });
 }
 
@@ -47,8 +41,31 @@ function register(username, password, confirmPassword, email, termsOfUse) {
   return fetch(`${appConstants.BACKEND_URL}/api/user/sign-up`, requestOptions).then(handleResponse);
 }
 
+function recoverPassword(email) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  return fetch(`${appConstants.BACKEND_URL}/api/user/recover-password?email=${email}`, requestOptions)
+    .then(handleResponse);
+}
+
+function setNewPassword(password, confirmPassword, token) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password, confirmPassword, token }),
+  };
+
+  return fetch(`${appConstants.BACKEND_URL}/api/user/change-password`, requestOptions)
+    .then(handleResponse);
+}
+
 export default {
   login,
   logout,
   register,
+  recoverPassword,
+  setNewPassword,
 };

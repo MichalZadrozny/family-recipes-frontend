@@ -1,7 +1,6 @@
 import userConstants from 'constants/user.constants';
 import alertActions from 'redux/actions/alert.actions';
 import userService from 'services/user.service';
-import { withRouter } from 'react-router';
 
 const login = (username, password) => {
 
@@ -30,6 +29,26 @@ const login = (username, password) => {
         },
       );
   };
+};
+
+const recoverPassword = (email) => dispatch => {
+  userService.recoverPassword(email)
+    .then(() => {
+      dispatch(alertActions.success(['Email został wysłany', 'Aby zmienić hasło kliknij w link w przesłanej przez nas wiadomości']));
+    })
+    .catch(error => {
+      dispatch(alertActions.error(['Odzyskiwanie hasła nieudane', error.toString()]));
+    });
+};
+
+const setNewPassword = (password, confirmPassword, token) => dispatch => {
+  userService.setNewPassword(password, confirmPassword, token)
+    .then(() => {
+      dispatch(alertActions.success(['Hasło zostało zmienione', 'Moższ się zalogować używając nowego hasła']));
+    })
+    .catch(() => {
+      dispatch(alertActions.error(['Odzyskiwanie hasła nieudane', 'Niepoprawny link']));
+    });
 };
 
 const logout = () => {
@@ -66,8 +85,15 @@ const register = (username, password, confirmPassword, email, termsOfUse) => {
   };
 };
 
-export default withRouter({
+const togglePasswordRecovery = () => ({ type: userConstants.TOGGLE_PASSWORD_RECOVERY });
+const setPasswordRecoveryToFalse = () => ({ type: userConstants.TOGGLE_PASSWORD_RECOVERY_FALSE });
+
+export default {
   login,
   logout,
   register,
-});
+  togglePasswordRecovery,
+  recoverPassword,
+  setNewPassword,
+  setPasswordRecoveryToFalse,
+};

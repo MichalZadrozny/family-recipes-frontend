@@ -1,19 +1,18 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { withRouter } from 'react-router';
-import ReactRouterPropTypes from 'react-router-prop-types';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import FormModal from 'components/Forms/FormModal/FormModal';
-import LoginForm from 'components/Forms/LoginForm/LoginForm';
+import LoginModal from 'components/Forms/FormModal/LoginModal/LoginModal';
+import userActions from 'redux/actions/user.actions';
 import styles from '../ProfileDropdown.module.scss';
 
-const LoginDropdownItem = ({ history }) => {
+const LoginDropdownItem = ({ setPasswordRecoveryToFalse }) => {
   const [modalShow, setModalShow] = React.useState(false);
   const onHide = () => {
     setModalShow(false);
-    history.push('/');
+    setPasswordRecoveryToFalse();
   };
-  const form = <LoginForm close={onHide} />;
 
   return (
     <>
@@ -23,18 +22,17 @@ const LoginDropdownItem = ({ history }) => {
         Logowanie
       </Dropdown.Item>
 
-      <FormModal
-        title='Logowanie'
-        show={modalShow}
-        onHide={onHide}
-        form={form}
-      />
+      <LoginModal onHide={onHide} modalShow={modalShow} />
     </>
   );
 };
 
-export default withRouter(LoginDropdownItem);
+const mapDispatchToProps = dispatch => ({
+  setPasswordRecoveryToFalse: () => dispatch(userActions.setPasswordRecoveryToFalse()),
+});
+
+export default connect(null, mapDispatchToProps)(LoginDropdownItem);
 
 LoginDropdownItem.propTypes = {
-  history: ReactRouterPropTypes.history.isRequired,
+  setPasswordRecoveryToFalse: PropTypes.func.isRequired,
 };

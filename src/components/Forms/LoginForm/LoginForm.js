@@ -8,6 +8,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
+import ForgotPasswordButton from 'components/Forms/FormModal/LoginModal/ForgotPasswordButton/ForgotPasswordButton';
 import userActions from 'redux/actions/user.actions';
 import styles from './LoginForm.module.scss';
 
@@ -56,6 +57,7 @@ const form = (props) => (
     </Form.Group>
 
     <Row className={styles.submit}>
+      <ForgotPasswordButton text='Nie pamiętasz hasła?' />
       <Button variant='primary' type='submit' disabled={props.isSubmitting}>
         Wyślij
       </Button>
@@ -67,7 +69,6 @@ const LoginForm = ({ history, close, login }) => (
   <Formik
     initialValues={initialValues}
     validationSchema={validationSchema}
-    render={form}
     onSubmit={({ username, password }, { setSubmitting, resetForm }) => {
       setSubmitting(true);
       login(username, password);
@@ -76,7 +77,9 @@ const LoginForm = ({ history, close, login }) => (
       history.push('/');
       setSubmitting(false);
     }}
-  />
+  >
+    {form}
+  </Formik>
 );
 
 const mapDispatchToProps = dispatch => ({
