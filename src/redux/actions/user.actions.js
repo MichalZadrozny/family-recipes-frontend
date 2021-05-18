@@ -25,7 +25,7 @@ const login = (username, password) => {
       .catch(
         error => {
           dispatch(failure(error.toString()));
-          dispatch(alertActions.error(['Logowanie nieudane', 'Użytkownik nie został znaleziony']));
+          dispatch(alertActions.error(['Logowanie nieudane', 'Nieprawidłowa nazwa użytkownika lub hasło']));
         },
       );
   };
