@@ -59,7 +59,7 @@ const form = (props) => (
     <Row className={styles.submit}>
       <ForgotPasswordButton text='Nie pamiętasz hasła?' />
       <Button variant='primary' type='submit' disabled={props.isSubmitting}>
-        Wyślij
+        Zaloguj
       </Button>
     </Row>
   </Form>
