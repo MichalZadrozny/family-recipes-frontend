@@ -12,7 +12,7 @@ const handleAddRating = (userId, recipeId, index, addRating, error) => {
   if (userId !== undefined) {
     addRating(userId, recipeId, 5 - index);
   } else {
-    error(['Nie można dodać oceny', 'Zaloguj się aby móc ocenić przepis']);
+    error(['Nie można dodać oceny', 'Zaloguj się, aby móc ocenić przepis']);
   }
 };
 
