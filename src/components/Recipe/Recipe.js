@@ -32,7 +32,10 @@ const Recipe = ({ recipe }) => (
         </Col>
         <Col className={styles.infoCol} xs={6} md={4}>
           <DietIcon diet={recipe.diet} />
-          <span className={styles.dietLabel}>Wegetariańska</span>
+          {recipe.diet === 'MEAT' && <span className={styles.dietLabel}>Mięsna</span>}
+          {recipe.diet === 'VEGETARIAN' && <span className={styles.dietLabel}>Wegetariańska</span>}
+          {recipe.diet === 'VEGAN' && <span className={styles.dietLabel}>Wegańska</span>}
+
         </Col>
       </Row>
 
